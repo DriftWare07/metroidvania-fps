@@ -14,7 +14,6 @@ speed = 17
 
 [node name="PlayerBullet" type="Area3D" parent="." groups=["player_damage"]]
 script = ExtResource("1_a7683")
-delete_host_on_dealing_damage = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerBullet"]
 shape = SubResource("SphereShape3D_k63ek")

@@ -107,7 +107,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("lightflash:visible")
+tracks/3/path = NodePath("arm_cannon_v2/lightflash:visible")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -159,7 +159,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("lightflash:visible")
+tracks/3/path = NodePath("arm_cannon_v2/lightflash:visible")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -208,34 +208,21 @@ magnitude = 0.01
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, -0.1, -0.15)
 script = ExtResource("3_m7blp")
 weapon = ExtResource("4_caq1d")
-muzzleFlash = NodePath("muzzleflash")
+muzzleFlash = NodePath("arm_cannon_v2/muzzleflash")
 animationPlayer = NodePath("../AnimationPlayer")
 aimcast = NodePath("../aimcast")
 cam = NodePath("../Camera3D")
 grabcast = NodePath("../grabcast")
-
-[node name="muzzleflash" type="GPUParticles3D" parent="Head/cannon"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0334908, -0.0213878, -0.478058)
-emitting = false
-amount = 1
-lifetime = 0.1
-one_shot = true
-randomness = 1.0
-local_coords = true
-process_material = SubResource("ParticleProcessMaterial_v346l")
-draw_pass_1 = SubResource("QuadMesh_fvitb")
+sway_left = Vector3(0, -0.1, 0)
+sway_right = Vector3(0, 0.1, 0)
+sway_up = Vector3(-0.2, 0, 0)
+sway_down = Vector3(0.1, 0, 0)
 
 [node name="plasmasound" type="AudioStreamPlayer3D" parent="Head/cannon"]
 stream = ExtResource("6_gulgk")
 attenuation_model = 3
 max_polyphony = 10
 bus = &"player_fx"
-
-[node name="lightflash" type="OmniLight3D" parent="Head/cannon"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0268712, -0.0320385, -0.424906)
-visible = false
-light_color = Color(1, 0.609375, 0, 1)
-shadow_enabled = true
 
 [node name="holdpoint" type="Node3D" parent="Head/cannon"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2, 0, -2)
@@ -245,6 +232,23 @@ transform = Transform3D(-0.869333, 0.232937, 7.86805e-08, 0.232937, 0.869333, 0,
 
 [node name="Cube" parent="Head/cannon/arm_cannon_v2" index="1"]
 visible = false
+
+[node name="muzzleflash" type="GPUParticles3D" parent="Head/cannon/arm_cannon_v2"]
+transform = Transform3D(-1.07325, 0.287577, -9.38266e-08, 0.287577, 1.07325, 2.51408e-08, 9.71364e-08, 2.4367e-15, -1.11111, 0.0349698, -0.013267, 0.642287)
+emitting = false
+amount = 1
+lifetime = 0.1
+one_shot = true
+randomness = 1.0
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_v346l")
+draw_pass_1 = SubResource("QuadMesh_fvitb")
+
+[node name="lightflash" type="OmniLight3D" parent="Head/cannon/arm_cannon_v2"]
+transform = Transform3D(-0.965926, 0.258819, -1.50996e-07, 0.258819, 0.965926, 2.26267e-08, 1.51707e-07, -1.72249e-08, -1, 0.0248024, -0.0227945, 0.583229)
+visible = false
+light_color = Color(1, 0.609375, 0, 1)
+shadow_enabled = true
 
 [node name="aimcast" type="RayCast3D" parent="Head"]
 target_position = Vector3(0, 0, -1000)

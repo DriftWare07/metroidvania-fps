@@ -17,10 +17,23 @@ var grabbedObject : RigidBody3D
 
 @export var lerp_speed = 500
 
+#weapon sway variables
+var mouse_mov :Vector2
+var sway_threshold = 1
+var sway_lerp = 5
+
+@export_group("sway settings")
+@export var sway_left : Vector3
+@export var sway_right : Vector3
+@export var sway_up : Vector3
+@export var sway_down : Vector3
+@export var sway_normal : Vector3
+
 func _process(delta: float) -> void:
 	#%subcamera.set_global_transform(cam.get_global_transform())
 	
 	grabObjects()
+	sway(delta)
 	if !weapon: return
 	cooldown -= delta
 	if Input.is_action_pressed("shoot") and cooldown < 0 and not isGrabbing:
@@ -76,3 +89,25 @@ func grabObjects():
 		
 		grabbedObject.linear_velocity = Vector3.ZERO
 		grabbedObject.apply_central_force(dir*speed)
+
+#weapon sway
+func _input(event: InputEvent) -> void:
+	if event is InputEventMouseMotion: 
+		mouse_mov.x = -event.relative.x
+		mouse_mov.y = -event.relative.y
+
+func sway(delta):
+	if mouse_mov != null:
+		if mouse_mov.x > sway_threshold:
+			rotation = rotation.lerp(sway_left, sway_lerp*delta)
+		elif mouse_mov.x < -sway_threshold:
+			rotation = rotation.lerp(sway_right, sway_lerp*delta)
+		else:
+			rotation = rotation.lerp(sway_normal, sway_lerp*delta)
+		
+		if mouse_mov.y > sway_threshold:
+			rotation = rotation.lerp(sway_up, sway_lerp*delta)
+		elif mouse_mov.y < -sway_threshold:
+			rotation = rotation.lerp(sway_down, sway_lerp*delta)
+		else:
+			rotation = rotation.lerp(sway_normal, sway_lerp*delta)
