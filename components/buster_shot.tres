@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="weaponData" load_steps=3 format=3 uid="uid://c1g6odcqyo4pq"]
+
+[ext_resource type="Script" path="res://components/weaponData.gd" id="1_br52r"]
+[ext_resource type="PackedScene" uid="uid://duy4lx1plrb7e" path="res://scenes/projectiles/player_bullet.tscn" id="1_k2l2u"]
+
+[resource]
+script = ExtResource("1_br52r")
+projectile_scene = ExtResource("1_k2l2u")
+cooldown = 0.4

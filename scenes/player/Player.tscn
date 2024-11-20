@@ -1,0 +1,304 @@
+[gd_scene load_steps=29 format=3 uid="uid://bhctlvvjdodc0"]
+
+[ext_resource type="Script" path="res://addons/Basic FPS Player/Src/basic_player_startup.gd" id="1_2sght"]
+[ext_resource type="PackedScene" uid="uid://kmyakts4l64t" path="res://addons/Basic FPS Player/Src/basic_player_head.tscn" id="2_ile1v"]
+[ext_resource type="Script" path="res://scenes/player/cannon.gd" id="3_m7blp"]
+[ext_resource type="Script" path="res://scenes/player/camera_shake.gd" id="3_ny3ul"]
+[ext_resource type="Script" path="res://components/healthcomponent.gd" id="3_pi5yv"]
+[ext_resource type="Resource" uid="uid://c1g6odcqyo4pq" path="res://components/buster_shot.tres" id="4_caq1d"]
+[ext_resource type="Texture2D" uid="uid://dmtdkj8hw6mh2" path="res://assets/scorch_02.png" id="5_llx0p"]
+[ext_resource type="AudioStream" uid="uid://jl43o1df0hy" path="res://assets/sounds/730564__tradeachest__scifi_gun_blast.wav" id="6_gulgk"]
+[ext_resource type="AudioStream" uid="uid://28f6i62y8wtc" path="res://assets/sounds/metal_impact_1.wav" id="8_j4m40"]
+[ext_resource type="PackedScene" uid="uid://c1mflcdj73miy" path="res://assets/models/arm_cannon_v2.glb" id="8_nngnf"]
+[ext_resource type="Texture2D" uid="uid://b3ihpfxyvijct" path="res://assets/crosshair188.png" id="8_typjj"]
+[ext_resource type="AudioStream" uid="uid://7pm6h5enrphb" path="res://assets/sounds/metal_impact_2.wav" id="9_cupe4"]
+[ext_resource type="AudioStream" uid="uid://dcsl8ynvmdr77" path="res://assets/sounds/metal_impact_3.wav" id="10_gglt7"]
+
+[sub_resource type="Gradient" id="Gradient_7uqg1"]
+offsets = PackedFloat32Array(0, 0.472296, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.472296, 0.472296, 0.472296, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_w1gde"]
+gradient = SubResource("Gradient_7uqg1")
+
+[sub_resource type="Curve" id="Curve_be4s3"]
+max_value = 25.0
+_data = [Vector2(0.329238, 25), 0.0, 0.0, 0, 0]
+point_count = 1
+
+[sub_resource type="CurveTexture" id="CurveTexture_xqlkp"]
+curve = SubResource("Curve_be4s3")
+
+[sub_resource type="Curve" id="Curve_uwm15"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_vy5a2"]
+curve = SubResource("Curve_uwm15")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_v346l"]
+angle_min = -720.0
+angle_max = 720.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.4
+scale_max = 0.6
+scale_curve = SubResource("CurveTexture_vy5a2")
+color = Color(1, 0.609375, 0, 1)
+color_ramp = SubResource("GradientTexture1D_w1gde")
+emission_curve = SubResource("CurveTexture_xqlkp")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q6ua8"]
+transparency = 1
+blend_mode = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("5_llx0p")
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+proximity_fade_enabled = true
+proximity_fade_distance = 0.1
+
+[sub_resource type="QuadMesh" id="QuadMesh_fvitb"]
+lightmap_size_hint = Vector2i(7, 7)
+material = SubResource("StandardMaterial3D_q6ua8")
+size = Vector2(0.5, 0.5)
+
+[sub_resource type="Animation" id="Animation_us7qe"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.2, -0.1, -0.15)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("plasmasound:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("lightflash:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_1157i"]
+resource_name = "standard_recoil"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.133333, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0.2, -0.1, -0.15), Vector3(0.2, -0.1, -0.13), Vector3(0.2, -0.1, -0.15)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.0666667, 0.133333),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0.261799, 0, 0), Vector3(0, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("plasmasound:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("lightflash:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.0666667, 0.133333),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_u4srt"]
+_data = {
+"RESET": SubResource("Animation_us7qe"),
+"standard_recoil": SubResource("Animation_1157i")
+}
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_li7ud"]
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_awm78"]
+streams_count = 3
+stream_0/stream = ExtResource("8_j4m40")
+stream_1/stream = ExtResource("9_cupe4")
+stream_2/stream = ExtResource("10_gglt7")
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_tbqci"]
+radius = 0.6
+height = 2.1
+
+[node name="Basic FPS Player" type="CharacterBody3D" groups=["player", "player_damage"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+script = ExtResource("1_2sght")
+KEY_BIND_UP = "forward"
+KEY_BIND_LEFT = "left"
+KEY_BIND_RIGHT = "right"
+KEY_BIND_DOWN = "back"
+KEY_BIND_JUMP = "jump"
+
+[node name="Head" parent="." instance=ExtResource("2_ile1v")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.412659, 0)
+
+[node name="Camera3D" parent="Head" index="0"]
+script = ExtResource("3_ny3ul")
+period = 0.1
+magnitude = 0.01
+
+[node name="cannon" type="Node3D" parent="Head" node_paths=PackedStringArray("muzzleFlash", "animationPlayer", "aimcast", "cam", "grabcast")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, -0.1, -0.15)
+script = ExtResource("3_m7blp")
+weapon = ExtResource("4_caq1d")
+muzzleFlash = NodePath("muzzleflash")
+animationPlayer = NodePath("../AnimationPlayer")
+aimcast = NodePath("../aimcast")
+cam = NodePath("../Camera3D")
+grabcast = NodePath("../grabcast")
+
+[node name="muzzleflash" type="GPUParticles3D" parent="Head/cannon"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0334908, -0.0213878, -0.478058)
+emitting = false
+amount = 1
+lifetime = 0.1
+one_shot = true
+randomness = 1.0
+local_coords = true
+process_material = SubResource("ParticleProcessMaterial_v346l")
+draw_pass_1 = SubResource("QuadMesh_fvitb")
+
+[node name="plasmasound" type="AudioStreamPlayer3D" parent="Head/cannon"]
+stream = ExtResource("6_gulgk")
+attenuation_model = 3
+max_polyphony = 10
+bus = &"player_fx"
+
+[node name="lightflash" type="OmniLight3D" parent="Head/cannon"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0268712, -0.0320385, -0.424906)
+visible = false
+light_color = Color(1, 0.609375, 0, 1)
+shadow_enabled = true
+
+[node name="holdpoint" type="Node3D" parent="Head/cannon"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2, 0, -2)
+
+[node name="arm_cannon_v2" parent="Head/cannon" instance=ExtResource("8_nngnf")]
+transform = Transform3D(-0.869333, 0.232937, 7.86805e-08, 0.232937, 0.869333, 0, -7.59995e-08, 2.0364e-08, -0.9, 0, -0.018, 0.1)
+
+[node name="Cube" parent="Head/cannon/arm_cannon_v2" index="1"]
+visible = false
+
+[node name="aimcast" type="RayCast3D" parent="Head"]
+target_position = Vector3(0, 0, -1000)
+
+[node name="grabcast" type="RayCast3D" parent="Head"]
+target_position = Vector3(0, 0, -2)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Head"]
+root_node = NodePath("../cannon")
+libraries = {
+"": SubResource("AnimationLibrary_u4srt")
+}
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_li7ud")
+
+[node name="Health_Component" type="Node" parent="." node_paths=PackedStringArray("host", "areas")]
+script = ExtResource("3_pi5yv")
+host = NodePath("..")
+areas = [NodePath("../damage")]
+damage_group = "damage"
+reload_scene_on_death = true
+
+[node name="damagesound" type="AudioStreamPlayer" parent="Health_Component"]
+stream = SubResource("AudioStreamRandomizer_awm78")
+max_polyphony = 3
+bus = &"player_fx"
+
+[node name="damage" type="Area3D" parent="."]
+
+[node name="damage_shape" type="CollisionShape3D" parent="damage"]
+shape = SubResource("CapsuleShape3D_tbqci")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("8_typjj")
+stretch_mode = 3
+
+[connection signal="damaged" from="Health_Component" to="Health_Component/damagesound" method="play"]
+
+[editable path="Head"]
+[editable path="Head/cannon/arm_cannon_v2"]

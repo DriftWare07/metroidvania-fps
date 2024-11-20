@@ -1,0 +1,5 @@
+extends Resource
+class_name weaponData
+
+@export var projectile_scene : PackedScene
+@export var cooldown = 0.4

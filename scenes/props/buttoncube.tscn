@@ -1,0 +1,15 @@
+[gd_scene load_steps=3 format=3 uid="uid://dm7s0ya1ht1dr"]
+
+[ext_resource type="PackedScene" uid="uid://gdxplt65khkb" path="res://assets/models/crate.glb" id="1_4qgjh"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_28tl3"]
+
+[node name="Buttoncube" type="RigidBody3D" groups=["grab"]]
+linear_damp = 0.5
+angular_damp = 0.5
+
+[node name="crate2" parent="." instance=ExtResource("1_4qgjh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_28tl3")

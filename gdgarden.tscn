@@ -1,0 +1,99 @@
+[gd_scene load_steps=17 format=3 uid="uid://ro1k6u0lpw2s"]
+
+[ext_resource type="PackedScene" uid="uid://bhctlvvjdodc0" path="res://scenes/player/Player.tscn" id="1_k5rbu"]
+[ext_resource type="Texture2D" uid="uid://bxqkyln6yukk6" path="res://addons/kenney_prototype_textures/dark/texture_02.png" id="2_pioyy"]
+[ext_resource type="Script" path="res://components/damagecomponent.gd" id="3_ex8i5"]
+[ext_resource type="Script" path="res://components/healthcomponent.gd" id="4_4w74l"]
+[ext_resource type="ArrayMesh" uid="uid://rjclm1ialgnp" path="res://assets/fireball.obj" id="5_8vbob"]
+[ext_resource type="Material" uid="uid://c2qtipprj3n0p" path="res://assets/plasmabullet.tres" id="5_wbqk7"]
+[ext_resource type="PackedScene" uid="uid://dm7s0ya1ht1dr" path="res://scenes/props/buttoncube.tscn" id="7_s6io2"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_iouvn"]
+albedo_texture = ExtResource("2_pioyy")
+uv1_triplanar = true
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_7qbm1"]
+sky_top_color = Color(0.26865, 0.680094, 0.800339, 1)
+
+[sub_resource type="Sky" id="Sky_bqcue"]
+sky_material = SubResource("ProceduralSkyMaterial_7qbm1")
+
+[sub_resource type="Environment" id="Environment_tbj01"]
+background_mode = 2
+sky = SubResource("Sky_bqcue")
+ssr_enabled = true
+ssao_enabled = true
+ssil_enabled = true
+sdfgi_enabled = true
+glow_enabled = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_b7ou6"]
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_slcjp"]
+data = PackedVector3Array(-0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_d0p4w"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_dtj7k"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_cnwp2"]
+radius = 0.6
+height = 2.1
+
+[node name="Gdgarden" type="Node3D"]
+
+[node name="Basic FPS Player" parent="." instance=ExtResource("1_k5rbu")]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+material_override = SubResource("StandardMaterial3D_iouvn")
+use_collision = true
+size = Vector3(100, 1, 100)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_tbj01")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.663456, 0.748215, 0, -0.748215, 0.663456, 0, 0, 0)
+
+[node name="Damage_Component" type="Area3D" parent="." groups=["damage"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.46749, 0.87859, 0)
+script = ExtResource("3_ex8i5")
+delete_host_on_dealing_damage = false
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Damage_Component"]
+mesh = SubResource("BoxMesh_b7ou6")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Damage_Component"]
+shape = SubResource("ConcavePolygonShape3D_slcjp")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.04206, 1.53286, -4.39462)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+mesh = SubResource("CapsuleMesh_d0p4w")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("CapsuleShape3D_dtj7k")
+
+[node name="Health_Component" type="Node" parent="StaticBody3D" node_paths=PackedStringArray("host", "areas")]
+script = ExtResource("4_4w74l")
+host = NodePath("..")
+areas = [NodePath("../Area3D")]
+max_health = 30
+health = 30
+iframes = 0.2
+damage_group = "player_damage"
+
+[node name="Area3D" type="Area3D" parent="StaticBody3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D/Area3D"]
+shape = SubResource("CapsuleShape3D_cnwp2")
+
+[node name="Fireball" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 1.87939, 1.72965)
+material_override = ExtResource("5_wbqk7")
+cast_shadow = 0
+mesh = ExtResource("5_8vbob")
+
+[node name="Buttoncube" parent="." instance=ExtResource("7_s6io2")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.913283, 1.15657, -3.52951)

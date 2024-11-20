@@ -1,0 +1,16 @@
+[gd_resource type="AudioBusLayout" load_steps=2 format=3 uid="uid://bvth4wrklrxgj"]
+
+[sub_resource type="AudioEffectFilter" id="AudioEffectFilter_p3s4s"]
+resource_name = "Filter"
+cutoff_hz = 1000.0
+gain = 0.0
+
+[resource]
+bus/1/name = &"player_fx"
+bus/1/solo = false
+bus/1/mute = false
+bus/1/bypass_fx = false
+bus/1/volume_db = -20.3764
+bus/1/send = &"Master"
+bus/1/effect/0/effect = SubResource("AudioEffectFilter_p3s4s")
+bus/1/effect/0/enabled = true

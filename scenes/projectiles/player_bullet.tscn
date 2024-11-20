@@ -1,0 +1,27 @@
+[gd_scene load_steps=6 format=3 uid="uid://duy4lx1plrb7e"]
+
+[ext_resource type="Script" path="res://scenes/projectiles/bullet.gd" id="1_6h0ku"]
+[ext_resource type="Script" path="res://components/damagecomponent.gd" id="1_a7683"]
+[ext_resource type="Material" uid="uid://c2qtipprj3n0p" path="res://assets/plasmabullet.tres" id="3_5ggsn"]
+[ext_resource type="ArrayMesh" uid="uid://rjclm1ialgnp" path="res://assets/fireball.obj" id="4_66ta0"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_k63ek"]
+radius = 0.05
+
+[node name="player_bullet" type="Node3D"]
+script = ExtResource("1_6h0ku")
+speed = 17
+
+[node name="PlayerBullet" type="Area3D" parent="." groups=["player_damage"]]
+script = ExtResource("1_a7683")
+delete_host_on_dealing_damage = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerBullet"]
+shape = SubResource("SphereShape3D_k63ek")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="PlayerBullet"]
+transform = Transform3D(-0.1, 0, -8.74228e-09, 0, 0.1, 0, 8.74228e-09, 0, -0.1, 0, 0, 0)
+material_override = ExtResource("3_5ggsn")
+mesh = ExtResource("4_66ta0")
+
+[connection signal="body_entered" from="PlayerBullet" to="." method="die_on_body"]
