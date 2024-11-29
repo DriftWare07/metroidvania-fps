@@ -1,14 +1,18 @@
 extends Node3D
 
+@export var weaponList : Array[weaponData]
 
+var weapon : weaponData
+var current_weapon = 0
 
-@export var weapon : weaponData
 var cooldown = 0
 
 @export var muzzleFlash : GPUParticles3D
 @export var animationPlayer : AnimationPlayer
 @export var aimcast : RayCast3D
 @export var cam : ShakeCamera
+@export var ui_label : Label
+@export var ui_icon : TextureRect
 
 @export var grabcast : RayCast3D
 
@@ -28,6 +32,9 @@ var sway_lerp = 5
 @export var sway_up : Vector3
 @export var sway_down : Vector3
 @export var sway_normal : Vector3
+
+func _ready() -> void:
+	weapon = weaponList[current_weapon]
 
 func _process(delta: float) -> void:
 	#%subcamera.set_global_transform(cam.get_global_transform())
@@ -55,7 +62,19 @@ func _process(delta: float) -> void:
 		cam._camera_shake()
 		
 	
+	if Input.is_action_just_released("weapon_up"): switchWeapon(1)
+	if Input.is_action_just_released("weapon_down"): switchWeapon(-1)
 	
+
+func switchWeapon(to):
+	if to + current_weapon > len(weaponList)-1:
+		current_weapon = 0
+	elif to - current_weapon < 0:
+		current_weapon = len(weaponList) -1
+	
+	weapon = weaponList[current_weapon]
+	ui_label.text = weapon.weapon_name
+	cooldown = 0
 
 func grabObjects():
 	#print(grabbedObject)

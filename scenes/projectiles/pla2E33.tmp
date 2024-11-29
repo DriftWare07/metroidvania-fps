@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://bflk4r5hahsm2"]
+
+[ext_resource type="Script" path="res://scenes/projectiles/player_missile.gd" id="1_c4yt4"]
+[ext_resource type="Script" path="res://components/damagecomponent.gd" id="2_5k8xi"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_k63ek"]
+radius = 0.05
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_6jnr4"]
+
+[node name="player_missile" type="Node3D"]
+script = ExtResource("1_c4yt4")
+speed = 1
+
+[node name="PlayerBullet" type="Area3D" parent="." groups=["player_damage"]]
+script = ExtResource("2_5k8xi")
+damage = 50
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerBullet"]
+shape = SubResource("SphereShape3D_k63ek")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="PlayerBullet"]
+transform = Transform3D(-0.1, 0, -8.74228e-09, -8.72752e-09, -0.00580867, 0.0998312, -5.07811e-10, 0.0998312, 0.00580867, 0, 0, 0)
+mesh = SubResource("CylinderMesh_6jnr4")
+
+[connection signal="body_entered" from="PlayerBullet" to="." method="die_on_body"]

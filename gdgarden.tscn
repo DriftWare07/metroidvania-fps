@@ -66,7 +66,7 @@ mesh = SubResource("BoxMesh_b7ou6")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Damage_Component"]
 shape = SubResource("ConcavePolygonShape3D_slcjp")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="."]
+[node name="StaticBody3D" type="StaticBody3D" parent="." groups=["enemy"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.04206, 1.53286, -4.39462)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]

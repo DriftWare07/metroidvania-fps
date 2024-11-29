@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="weaponData" load_steps=3 format=3 uid="uid://c70iqw802rab2"]
+
+[ext_resource type="Script" path="res://components/weaponData.gd" id="1_ht7tm"]
+[ext_resource type="PackedScene" uid="uid://bflk4r5hahsm2" path="res://scenes/projectiles/player_missile.tscn" id="1_ytc0w"]
+
+[resource]
+script = ExtResource("1_ht7tm")
+weapon_name = "Homing Missile"
+projectile_scene = ExtResource("1_ytc0w")
+cooldown = 1.0
