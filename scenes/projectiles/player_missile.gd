@@ -6,6 +6,7 @@ extends Node3D
 @export var turn_mult = 2
 var targets = []
 var target : Node3D
+var rot = Vector3()
 
 func _ready() -> void:
 	targets = get_tree().get_nodes_in_group("enemy")
@@ -16,13 +17,34 @@ func _ready() -> void:
 			target = i
 
 
-func _process(delta: float) -> void:
-	global_position += -transform.basis.z*(speed*delta)
-	
+#func _process(delta: float) -> void:
+	#global_position += -transform.basis.z*(speed*delta)
+	#
+	#if target != null:
+		#$guide.look_at(target.global_position)
+		#global_rotation = lerp(global_rotation, $guide.global_rotation, delta*turn_mult)
+
+func _physics_process(delta: float) -> void:
 	if target != null:
-		$guide.look_at(target.global_position)
-		global_rotation = lerp(global_rotation, $guide.global_rotation, delta*turn_mult)
+		var direction = target.global_transform.origin - global_transform.origin
+		
+		direction = direction.normalized()
+		
+		var rotateAmount = direction.cross(global_transform.basis.z)
+		rot.y = rotateAmount.y*turn_mult*delta
+		rot.x = rotateAmount.x*turn_mult*delta
+		
+		rotate(Vector3.UP, rot.y)
+		rotate(Vector3.RIGHT, rot.x)
+		
+		global_translate(-global_transform.basis.z*speed*delta)
+	else:
+		global_position += -transform.basis.z*(speed*delta)
 
 func die_on_body(body):
 	if body.is_in_group("player"): return
 	queue_free()
+
+func rotateTowards(q1, q2, dTheta):
+	var t = clamp(dTheta / q1.angle_to(q2), 0, 1)
+	return q1.slerp(q2, t)

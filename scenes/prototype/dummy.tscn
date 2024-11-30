@@ -1,0 +1,34 @@
+[gd_scene load_steps=5 format=3 uid="uid://bi331f08jt3lk"]
+
+[ext_resource type="Script" path="res://components/healthcomponent.gd" id="1_4wq36"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_d0p4w"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_dtj7k"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_cnwp2"]
+radius = 0.6
+height = 2.1
+
+[node name="dummy" type="StaticBody3D" groups=["enemy"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.04206, 1.53286, -4.39462)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_d0p4w")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_dtj7k")
+
+[node name="Health_Component" type="Node" parent="." node_paths=PackedStringArray("host", "areas")]
+script = ExtResource("1_4wq36")
+host = NodePath("..")
+areas = [NodePath("../Area3D")]
+max_health = 30
+health = 30
+iframes = 0.2
+damage_group = "player_damage"
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("CapsuleShape3D_cnwp2")

@@ -1,9 +1,9 @@
-[gd_scene load_steps=17 format=3 uid="uid://ro1k6u0lpw2s"]
+[gd_scene load_steps=14 format=3 uid="uid://ro1k6u0lpw2s"]
 
 [ext_resource type="PackedScene" uid="uid://bhctlvvjdodc0" path="res://scenes/player/Player.tscn" id="1_k5rbu"]
 [ext_resource type="Texture2D" uid="uid://bxqkyln6yukk6" path="res://addons/kenney_prototype_textures/dark/texture_02.png" id="2_pioyy"]
 [ext_resource type="Script" path="res://components/damagecomponent.gd" id="3_ex8i5"]
-[ext_resource type="Script" path="res://components/healthcomponent.gd" id="4_4w74l"]
+[ext_resource type="PackedScene" uid="uid://bi331f08jt3lk" path="res://scenes/prototype/dummy.tscn" id="4_3fmda"]
 [ext_resource type="ArrayMesh" uid="uid://rjclm1ialgnp" path="res://assets/fireball.obj" id="5_8vbob"]
 [ext_resource type="Material" uid="uid://c2qtipprj3n0p" path="res://assets/plasmabullet.tres" id="5_wbqk7"]
 [ext_resource type="PackedScene" uid="uid://dm7s0ya1ht1dr" path="res://scenes/props/buttoncube.tscn" id="7_s6io2"]
@@ -32,14 +32,6 @@ glow_enabled = true
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_slcjp"]
 data = PackedVector3Array(-0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5)
 
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_d0p4w"]
-
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_dtj7k"]
-
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_cnwp2"]
-radius = 0.6
-height = 2.1
-
 [node name="Gdgarden" type="Node3D"]
 
 [node name="Basic FPS Player" parent="." instance=ExtResource("1_k5rbu")]
@@ -66,28 +58,28 @@ mesh = SubResource("BoxMesh_b7ou6")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Damage_Component"]
 shape = SubResource("ConcavePolygonShape3D_slcjp")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="." groups=["enemy"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.04206, 1.53286, -4.39462)
+[node name="dummy" parent="." instance=ExtResource("4_3fmda")]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
-mesh = SubResource("CapsuleMesh_d0p4w")
+[node name="dummy2" parent="." instance=ExtResource("4_3fmda")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.50028, 1.53286, -10.0013)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
-shape = SubResource("CapsuleShape3D_dtj7k")
+[node name="dummy3" parent="." instance=ExtResource("4_3fmda")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.9959, 1.53286, -7.07842)
 
-[node name="Health_Component" type="Node" parent="StaticBody3D" node_paths=PackedStringArray("host", "areas")]
-script = ExtResource("4_4w74l")
-host = NodePath("..")
-areas = [NodePath("../Area3D")]
-max_health = 30
-health = 30
-iframes = 0.2
-damage_group = "player_damage"
+[node name="dummy4" parent="." instance=ExtResource("4_3fmda")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0258102, 1.53286, -7.05581)
 
-[node name="Area3D" type="Area3D" parent="StaticBody3D"]
+[node name="dummy5" parent="." instance=ExtResource("4_3fmda")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.62961, 1.53286, -6.26591)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D/Area3D"]
-shape = SubResource("CapsuleShape3D_cnwp2")
+[node name="dummy6" parent="." instance=ExtResource("4_3fmda")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.7533, 1.53286, -3.58897)
+
+[node name="dummy7" parent="." instance=ExtResource("4_3fmda")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.4918, 1.53286, -1.59205)
+
+[node name="dummy8" parent="." instance=ExtResource("4_3fmda")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.32175, 1.53286, 0.948841)
 
 [node name="Fireball" type="MeshInstance3D" parent="."]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 1.87939, 1.72965)

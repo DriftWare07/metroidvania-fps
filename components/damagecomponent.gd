@@ -1,6 +1,8 @@
 extends Area3D
 class_name Damage_Component
 
+signal damageDelt
+
 @export var damage = 10
 
 @export var delete_host_on_dealing_damage = true
@@ -8,4 +10,5 @@ class_name Damage_Component
 
 
 func callback():
-	if delete_host_on_dealing_damage: queue_free()
+	print("callback")
+	if delete_host_on_dealing_damage: get_parent().queue_free()
