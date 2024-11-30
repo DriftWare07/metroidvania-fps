@@ -11,8 +11,10 @@ var cooldown = 0
 @export var animationPlayer : AnimationPlayer
 @export var aimcast : RayCast3D
 @export var cam : ShakeCamera
+@export var sound :AudioStreamPlayer3D
 @export var ui_label : Label
 @export var ui_icon : TextureRect
+
 
 @export var grabcast : RayCast3D
 
@@ -35,6 +37,7 @@ var sway_lerp = 5
 
 func _ready() -> void:
 	weapon = weaponList[current_weapon]
+	switchWeapon(0)
 
 func _process(delta: float) -> void:
 	#%subcamera.set_global_transform(cam.get_global_transform())
@@ -73,6 +76,7 @@ func switchWeapon(to):
 		current_weapon = len(weaponList) -1
 	
 	weapon = weaponList[current_weapon]
+	sound.stream = weapon.sound
 	ui_label.text = weapon.weapon_name
 	cooldown = 0
 

@@ -9,12 +9,7 @@ var target : Node3D
 var rot = Vector3()
 
 func _ready() -> void:
-	targets = get_tree().get_nodes_in_group("enemy")
-	if targets.is_empty():return
-	target = targets[0]
-	for i in targets:
-		if global_position.distance_to(i.global_position) < global_position.distance_to(target.global_position):
-			target = i
+	get_targets()
 
 
 #func _process(delta: float) -> void:
@@ -40,11 +35,18 @@ func _physics_process(delta: float) -> void:
 		global_translate(-global_transform.basis.z*speed*delta)
 	else:
 		global_position += -transform.basis.z*(speed*delta)
+		get_targets()
 
 func die_on_body(body):
 	if body.is_in_group("player"): return
 	queue_free()
 
-func rotateTowards(q1, q2, dTheta):
-	var t = clamp(dTheta / q1.angle_to(q2), 0, 1)
-	return q1.slerp(q2, t)
+
+
+func get_targets():
+	targets = get_tree().get_nodes_in_group("enemy")
+	if targets.is_empty():return
+	target = targets[0]
+	for i in targets:
+		if global_position.distance_to(i.global_position) < global_position.distance_to(target.global_position):
+			target = i

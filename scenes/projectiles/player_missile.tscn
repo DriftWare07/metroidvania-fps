@@ -3,21 +3,20 @@
 [ext_resource type="Script" path="res://scenes/projectiles/player_missile.gd" id="1_c4yt4"]
 [ext_resource type="Script" path="res://components/damagecomponent.gd" id="2_5k8xi"]
 [ext_resource type="Texture2D" uid="uid://dmtdkj8hw6mh2" path="res://assets/scorch_02.png" id="3_1psw6"]
+[ext_resource type="PackedScene" uid="uid://cgnrdvy8nx8vv" path="res://assets/models/missile/missile.glb" id="3_aalnx"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_k63ek"]
 radius = 0.05
 
-[sub_resource type="CylinderMesh" id="CylinderMesh_6jnr4"]
-
 [sub_resource type="Curve" id="Curve_c6q0c"]
-_data = [Vector2(0.00491401, 0), 0.0, 0.0, 0, 0, Vector2(0.511057, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 3
+_data = [Vector2(0, 0.579663), 0.0, 0.0, 0, 0, Vector2(1e-05, 0), 0.0, 0.0, 0, 0, Vector2(0.316953, 1), 0.0, 0.0, 0, 0, Vector2(0.850123, 0), 0.0, 0.0, 0, 0]
+point_count = 4
 
 [sub_resource type="CurveTexture" id="CurveTexture_tydri"]
 curve = SubResource("Curve_c6q0c")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_q4k4e"]
-gravity = Vector3(0, 0, 0)
+gravity = Vector3(0, 0, 1)
 scale_min = 0.0
 scale_max = 0.2
 scale_curve = SubResource("CurveTexture_tydri")
@@ -40,6 +39,7 @@ material = SubResource("StandardMaterial3D_5h8xo")
 [node name="player_missile" type="Node3D" groups=["damage"]]
 script = ExtResource("1_c4yt4")
 speed = 10
+turn_mult = 3
 
 [node name="PlayerBullet" type="Area3D" parent="." groups=["player_damage"]]
 script = ExtResource("2_5k8xi")
@@ -48,15 +48,15 @@ damage = 50
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerBullet"]
 shape = SubResource("SphereShape3D_k63ek")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="PlayerBullet"]
-transform = Transform3D(-0.1, -8.74228e-09, 0, -3.82137e-16, 4.37114e-09, -0.1, 8.74228e-09, -0.1, -4.37114e-09, 0, 0, 0)
-mesh = SubResource("CylinderMesh_6jnr4")
+[node name="missile" parent="PlayerBullet" instance=ExtResource("3_aalnx")]
+transform = Transform3D(0.4, 0, 0, 0, -1.74846e-08, 0.4, 0, -0.4, -1.74846e-08, 0, 0, 0)
 
 [node name="guide" type="Node3D" parent="."]
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.130121)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.13936)
 amount = 100
+local_coords = true
 process_material = SubResource("ParticleProcessMaterial_q4k4e")
 draw_pass_1 = SubResource("QuadMesh_okqeu")
 

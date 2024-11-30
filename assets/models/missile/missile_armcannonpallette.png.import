@@ -2,17 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dg1vo6cyermwp"
-path.s3tc="res://.godot/imported/armcannonemission2.png-b3804d2fc632b1c1c13594f3d7304c0a.s3tc.ctex"
+uid="uid://4sm5kjdlhqbm"
+path.s3tc="res://.godot/imported/missile_armcannonpallette.png-41f231242c0c9dddd6f5e007db98dcf6.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
+generator_parameters={
+"md5": "6d4b5b3203e15c7d594857259bea7f12"
+}
 
 [deps]
 
-source_file="res://assets/models/arm cannon materials/armcannonemission2.png"
-dest_files=["res://.godot/imported/armcannonemission2.png-b3804d2fc632b1c1c13594f3d7304c0a.s3tc.ctex"]
+source_file="res://assets/models/missile/missile_armcannonpallette.png"
+dest_files=["res://.godot/imported/missile_armcannonpallette.png-41f231242c0c9dddd6f5e007db98dcf6.s3tc.ctex"]
 
 [params]
 

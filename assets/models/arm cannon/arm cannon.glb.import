@@ -4,12 +4,12 @@ importer="scene"
 importer_version=1
 type="PackedScene"
 uid="uid://cbn1j3qa8cv8a"
-path="res://.godot/imported/arm cannon.glb-33c40131f80b306d2f03b7c3641d6428.scn"
+path="res://.godot/imported/arm cannon.glb-279179b0cf4494d095705945d1c257e7.scn"
 
 [deps]
 
-source_file="res://assets/models/arm cannon.glb"
-dest_files=["res://.godot/imported/arm cannon.glb-33c40131f80b306d2f03b7c3641d6428.scn"]
+source_file="res://assets/models/arm cannon/arm cannon.glb"
+dest_files=["res://.godot/imported/arm cannon.glb-279179b0cf4494d095705945d1c257e7.scn"]
 
 [params]
 

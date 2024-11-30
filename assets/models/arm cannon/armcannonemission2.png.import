@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bi2s56sx845wq"
-path.s3tc="res://.godot/imported/armcannonpallette.png-f12187c333bad2140ac3353d05e1eab1.s3tc.ctex"
+uid="uid://dg1vo6cyermwp"
+path.s3tc="res://.godot/imported/armcannonemission2.png-89b2c311e8a17f6db59e9ace37caed6b.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://assets/models/arm cannon materials/armcannonpallette.png"
-dest_files=["res://.godot/imported/armcannonpallette.png-f12187c333bad2140ac3353d05e1eab1.s3tc.ctex"]
+source_file="res://assets/models/arm cannon/armcannonemission2.png"
+dest_files=["res://.godot/imported/armcannonemission2.png-89b2c311e8a17f6db59e9ace37caed6b.s3tc.ctex"]
 
 [params]
 

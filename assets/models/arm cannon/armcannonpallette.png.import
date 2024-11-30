@@ -2,20 +2,17 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cgpfuwrc266ab"
-path.s3tc="res://.godot/imported/arm_cannon_v2_armcannonpallette.png-aa6bc3a58fff6d5f2666a3891ba4b490.s3tc.ctex"
+uid="uid://bi2s56sx845wq"
+path.s3tc="res://.godot/imported/armcannonpallette.png-369f1ff375eab21aeb6f4fd5ee0e93c7.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
-generator_parameters={
-"md5": "6d4b5b3203e15c7d594857259bea7f12"
-}
 
 [deps]
 
-source_file="res://assets/models/arm_cannon_v2_armcannonpallette.png"
-dest_files=["res://.godot/imported/arm_cannon_v2_armcannonpallette.png-aa6bc3a58fff6d5f2666a3891ba4b490.s3tc.ctex"]
+source_file="res://assets/models/arm cannon/armcannonpallette.png"
+dest_files=["res://.godot/imported/armcannonpallette.png-369f1ff375eab21aeb6f4fd5ee0e93c7.s3tc.ctex"]
 
 [params]
 

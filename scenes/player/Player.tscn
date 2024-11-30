@@ -5,13 +5,13 @@
 [ext_resource type="Script" path="res://scenes/player/cannon.gd" id="3_m7blp"]
 [ext_resource type="Script" path="res://scenes/player/camera_shake.gd" id="3_ny3ul"]
 [ext_resource type="Script" path="res://components/healthcomponent.gd" id="3_pi5yv"]
-[ext_resource type="Resource" uid="uid://c1g6odcqyo4pq" path="res://components/buster_shot.tres" id="4_caq1d"]
+[ext_resource type="Resource" uid="uid://c1g6odcqyo4pq" path="res://weapons/buster_shot.tres" id="4_caq1d"]
 [ext_resource type="Texture2D" uid="uid://dmtdkj8hw6mh2" path="res://assets/scorch_02.png" id="5_llx0p"]
 [ext_resource type="Script" path="res://components/weaponData.gd" id="5_yq843"]
 [ext_resource type="AudioStream" uid="uid://jl43o1df0hy" path="res://assets/sounds/730564__tradeachest__scifi_gun_blast.wav" id="6_gulgk"]
-[ext_resource type="Resource" uid="uid://c70iqw802rab2" path="res://components/missile_shot.tres" id="7_db4b2"]
+[ext_resource type="Resource" uid="uid://c70iqw802rab2" path="res://weapons/missile_shot.tres" id="7_db4b2"]
 [ext_resource type="AudioStream" uid="uid://28f6i62y8wtc" path="res://assets/sounds/metal_impact_1.wav" id="8_j4m40"]
-[ext_resource type="PackedScene" uid="uid://c1mflcdj73miy" path="res://assets/models/arm_cannon_v2.glb" id="8_nngnf"]
+[ext_resource type="PackedScene" uid="uid://c1mflcdj73miy" path="res://assets/models/arm cannon/arm_cannon_v2.glb" id="8_nngnf"]
 [ext_resource type="Texture2D" uid="uid://b3ihpfxyvijct" path="res://assets/crosshair188.png" id="8_typjj"]
 [ext_resource type="AudioStream" uid="uid://7pm6h5enrphb" path="res://assets/sounds/metal_impact_2.wav" id="9_cupe4"]
 [ext_resource type="AudioStream" uid="uid://dcsl8ynvmdr77" path="res://assets/sounds/metal_impact_3.wav" id="10_gglt7"]
@@ -207,7 +207,7 @@ script = ExtResource("3_ny3ul")
 period = 0.1
 magnitude = 0.01
 
-[node name="cannon" type="Node3D" parent="Head" node_paths=PackedStringArray("muzzleFlash", "animationPlayer", "aimcast", "cam", "ui_label", "ui_icon", "grabcast")]
+[node name="cannon" type="Node3D" parent="Head" node_paths=PackedStringArray("muzzleFlash", "animationPlayer", "aimcast", "cam", "sound", "ui_label", "ui_icon", "grabcast")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, -0.1, -0.15)
 script = ExtResource("3_m7blp")
 weaponList = Array[ExtResource("5_yq843")]([ExtResource("4_caq1d"), ExtResource("7_db4b2")])
@@ -215,6 +215,7 @@ muzzleFlash = NodePath("arm_cannon_v2/muzzleflash")
 animationPlayer = NodePath("../AnimationPlayer")
 aimcast = NodePath("../aimcast")
 cam = NodePath("../Camera3D")
+sound = NodePath("plasmasound")
 ui_label = NodePath("../../CanvasLayer/Control/weaponpanel/weapon")
 ui_icon = NodePath("../../CanvasLayer/Control/weaponpanel/weapon_icon")
 grabcast = NodePath("../grabcast")
