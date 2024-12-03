@@ -51,7 +51,7 @@ func _process(delta: float) -> void:
 		var p = weapon.projectile_scene.instantiate()
 		
 		get_tree().root.add_child(p)
-		p.global_position = global_position
+		p.global_position = muzzleFlash.global_position
 		
 		if aimcast.is_colliding():
 			p.look_at(aimcast.get_collision_point())
@@ -70,10 +70,13 @@ func _process(delta: float) -> void:
 	
 
 func switchWeapon(to):
+	print("switching")
 	if to + current_weapon > len(weaponList)-1:
 		current_weapon = 0
-	elif to - current_weapon < 0:
-		current_weapon = len(weaponList) -1
+	elif to + current_weapon < 0:
+		current_weapon = len(weaponList)-1
+	else:
+		current_weapon += to
 	
 	weapon = weaponList[current_weapon]
 	sound.stream = weapon.sound

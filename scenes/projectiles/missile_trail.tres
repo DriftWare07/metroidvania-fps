@@ -1,0 +1,14 @@
+[gd_resource type="ParticleProcessMaterial" load_steps=3 format=3 uid="uid://d18kcjpxf2x8q"]
+
+[sub_resource type="Curve" id="Curve_c6q0c"]
+_data = [Vector2(0, 0.579663), 0.0, 0.0, 0, 0, Vector2(1e-05, 0), 0.0, 0.0, 0, 0, Vector2(0.316953, 1), 0.0, 0.0, 0, 0, Vector2(0.850123, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_tydri"]
+curve = SubResource("Curve_c6q0c")
+
+[resource]
+gravity = Vector3(0, 0, 1)
+scale_min = 0.0
+scale_max = 0.2
+scale_curve = SubResource("CurveTexture_tydri")

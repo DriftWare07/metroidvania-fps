@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://cxftm7ftt8gd7"]
+
+[ext_resource type="Script" path="res://scenes/projectiles/scatterblasterspawner.gd" id="1_rojnm"]
+[ext_resource type="PackedScene" uid="uid://bkfiju1ayq1yc" path="res://scenes/projectiles/player_pellet.tscn" id="2_y62xj"]
+
+[node name="Scatterblasterspawner" type="Node3D"]
+script = ExtResource("1_rojnm")
+scene = ExtResource("2_y62xj")
+spread = 0.1

@@ -8,5 +8,5 @@
 script = ExtResource("2_k8sbp")
 weapon_name = "Homing Missile"
 projectile_scene = ExtResource("1_hyrha")
-cooldown = 1.0
+cooldown = 0.7
 sound = ExtResource("3_ahggm")

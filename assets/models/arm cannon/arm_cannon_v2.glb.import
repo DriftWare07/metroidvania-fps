@@ -35,7 +35,7 @@ _subresources={
 "materials": {
 "Material.002": {
 "use_external/enabled": true,
-"use_external/path": "res://assets/models/arm cannon materials/Material.002.tres"
+"use_external/path": "res://assets/models/arm cannon/Material.002.tres"
 },
 "Material.003": {
 "use_external/enabled": true,

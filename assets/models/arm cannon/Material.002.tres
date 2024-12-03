@@ -9,5 +9,5 @@ cull_mode = 2
 albedo_texture = ExtResource("1_y874h")
 roughness = 0.5
 emission_enabled = true
-emission_energy_multiplier = 4.71
+emission_energy_multiplier = 5.0
 emission_texture = ExtResource("2_y84by")

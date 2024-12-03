@@ -5,4 +5,4 @@
 [resource]
 render_priority = 0
 shader = ExtResource("1_om07j")
-shader_parameter/Flame_Color = Color(0.6, 1.3, 2, 1)
+shader_parameter/Flame_Color = Color(2, 1.6, 0, 1)
