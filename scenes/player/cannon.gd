@@ -60,9 +60,13 @@ func _process(delta: float) -> void:
 		
 		
 		cooldown = weapon.cooldown
-		muzzleFlash.restart()
-		animationPlayer.play("standard_recoil")
-		cam._camera_shake()
+		
+		#print("shooting "+str(delta))
+		if !weapon.no_anim:
+			animationPlayer.play("standard_recoil")
+			cam._camera_shake()
+			muzzleFlash.restart()
+			sound.play()
 		
 	
 	if Input.is_action_just_released("weapon_up"): switchWeapon(1)
@@ -79,7 +83,7 @@ func switchWeapon(to):
 		current_weapon += to
 	
 	weapon = weaponList[current_weapon]
-	sound.stream = weapon.sound
+	if weapon.sound: sound.stream = weapon.sound
 	ui_label.text = weapon.weapon_name
 	cooldown = 0
 

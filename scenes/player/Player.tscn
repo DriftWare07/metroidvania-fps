@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://bhctlvvjdodc0"]
+[gd_scene load_steps=34 format=3 uid="uid://bhctlvvjdodc0"]
 
 [ext_resource type="Script" path="res://addons/Basic FPS Player/Src/basic_player_startup.gd" id="1_2sght"]
 [ext_resource type="PackedScene" uid="uid://kmyakts4l64t" path="res://addons/Basic FPS Player/Src/basic_player_head.tscn" id="2_ile1v"]
@@ -8,15 +8,17 @@
 [ext_resource type="Resource" uid="uid://c1g6odcqyo4pq" path="res://weapons/buster_shot.tres" id="4_caq1d"]
 [ext_resource type="Texture2D" uid="uid://dmtdkj8hw6mh2" path="res://assets/scorch_02.png" id="5_llx0p"]
 [ext_resource type="Script" path="res://components/weaponData.gd" id="5_yq843"]
-[ext_resource type="AudioStream" uid="uid://jl43o1df0hy" path="res://assets/sounds/730564__tradeachest__scifi_gun_blast.wav" id="6_gulgk"]
 [ext_resource type="Resource" uid="uid://c70iqw802rab2" path="res://weapons/missile_shot.tres" id="7_db4b2"]
 [ext_resource type="Resource" uid="uid://bpo35cbablaou" path="res://weapons/scatter_shot.tres" id="8_7mr4s"]
 [ext_resource type="AudioStream" uid="uid://28f6i62y8wtc" path="res://assets/sounds/metal_impact_1.wav" id="8_j4m40"]
 [ext_resource type="PackedScene" uid="uid://c1mflcdj73miy" path="res://assets/models/arm cannon/arm_cannon_v2.glb" id="8_nngnf"]
 [ext_resource type="Texture2D" uid="uid://b3ihpfxyvijct" path="res://assets/crosshair188.png" id="8_typjj"]
 [ext_resource type="AudioStream" uid="uid://7pm6h5enrphb" path="res://assets/sounds/metal_impact_2.wav" id="9_cupe4"]
+[ext_resource type="Resource" uid="uid://bsves1hlyry6r" path="res://weapons/napalmer_shot.tres" id="9_ubqqx"]
 [ext_resource type="AudioStream" uid="uid://dcsl8ynvmdr77" path="res://assets/sounds/metal_impact_3.wav" id="10_gglt7"]
 [ext_resource type="Texture2D" uid="uid://6cqnaoe3i3o1" path="res://icon.png" id="16_nxr56"]
+
+[sub_resource type="AudioStream" id="AudioStream_4k88m"]
 
 [sub_resource type="Gradient" id="Gradient_7uqg1"]
 offsets = PackedFloat32Array(0, 0.472296, 1)
@@ -98,7 +100,7 @@ tracks/1/keys = {
 }
 tracks/2/type = "value"
 tracks/2/imported = false
-tracks/2/enabled = true
+tracks/2/enabled = false
 tracks/2/path = NodePath("plasmasound:playing")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
@@ -211,7 +213,7 @@ magnitude = 0.01
 [node name="cannon" type="Node3D" parent="Head" node_paths=PackedStringArray("muzzleFlash", "animationPlayer", "aimcast", "cam", "sound", "ui_label", "ui_icon", "grabcast")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, -0.1, -0.15)
 script = ExtResource("3_m7blp")
-weaponList = Array[ExtResource("5_yq843")]([ExtResource("4_caq1d"), ExtResource("7_db4b2"), ExtResource("8_7mr4s")])
+weaponList = Array[ExtResource("5_yq843")]([ExtResource("4_caq1d"), ExtResource("7_db4b2"), ExtResource("8_7mr4s"), ExtResource("9_ubqqx")])
 muzzleFlash = NodePath("arm_cannon_v2/muzzleflash")
 animationPlayer = NodePath("../AnimationPlayer")
 aimcast = NodePath("../aimcast")
@@ -226,9 +228,9 @@ sway_up = Vector3(-0.2, 0, 0)
 sway_down = Vector3(0.1, 0, 0)
 
 [node name="plasmasound" type="AudioStreamPlayer3D" parent="Head/cannon"]
-stream = ExtResource("6_gulgk")
+stream = SubResource("AudioStream_4k88m")
 attenuation_model = 3
-max_polyphony = 10
+max_polyphony = 3
 bus = &"player_fx"
 
 [node name="holdpoint" type="Node3D" parent="Head/cannon"]
