@@ -16,6 +16,10 @@ run/main_scene="res://gdgarden.tscn"
 config/features=PackedStringArray("4.3")
 config/icon="res://icon.png"
 
+[autoload]
+
+Global="*res://components/Global.gd"
+
 [display]
 
 window/size/viewport_width=1920

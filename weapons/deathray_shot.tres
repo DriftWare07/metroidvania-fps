@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="weaponData" load_steps=4 format=3 uid="uid://b7g8n6n21fhfx"]
+
+[ext_resource type="Script" path="res://components/weaponData.gd" id="1_7pwa6"]
+[ext_resource type="PackedScene" uid="uid://wfp52hhpu7ig" path="res://scenes/projectiles/player_deathray_beam.tscn" id="1_u7ol6"]
+[ext_resource type="AudioStream" uid="uid://cwpiq85k0jsch" path="res://assets/sounds/393374__evanboyerman__big-sci-fi-explosionbomb-close-mixed.wav" id="2_1n3dj"]
+
+[resource]
+script = ExtResource("1_7pwa6")
+weapon_name = "Deathray"
+projectile_scene = ExtResource("1_u7ol6")
+cooldown = 0.4
+sound = ExtResource("2_1n3dj")
+no_anim = true

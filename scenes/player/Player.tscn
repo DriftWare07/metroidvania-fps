@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://bhctlvvjdodc0"]
+[gd_scene load_steps=35 format=3 uid="uid://bhctlvvjdodc0"]
 
 [ext_resource type="Script" path="res://addons/Basic FPS Player/Src/basic_player_startup.gd" id="1_2sght"]
 [ext_resource type="PackedScene" uid="uid://kmyakts4l64t" path="res://addons/Basic FPS Player/Src/basic_player_head.tscn" id="2_ile1v"]
@@ -15,6 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://b3ihpfxyvijct" path="res://assets/crosshair188.png" id="8_typjj"]
 [ext_resource type="AudioStream" uid="uid://7pm6h5enrphb" path="res://assets/sounds/metal_impact_2.wav" id="9_cupe4"]
 [ext_resource type="Resource" uid="uid://bsves1hlyry6r" path="res://weapons/napalmer_shot.tres" id="9_ubqqx"]
+[ext_resource type="Resource" uid="uid://b7g8n6n21fhfx" path="res://weapons/deathray_shot.tres" id="10_156a8"]
 [ext_resource type="AudioStream" uid="uid://dcsl8ynvmdr77" path="res://assets/sounds/metal_impact_3.wav" id="10_gglt7"]
 [ext_resource type="Texture2D" uid="uid://6cqnaoe3i3o1" path="res://icon.png" id="16_nxr56"]
 
@@ -213,7 +214,7 @@ magnitude = 0.01
 [node name="cannon" type="Node3D" parent="Head" node_paths=PackedStringArray("muzzleFlash", "animationPlayer", "aimcast", "cam", "sound", "ui_label", "ui_icon", "grabcast")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, -0.1, -0.15)
 script = ExtResource("3_m7blp")
-weaponList = Array[ExtResource("5_yq843")]([ExtResource("4_caq1d"), ExtResource("7_db4b2"), ExtResource("8_7mr4s"), ExtResource("9_ubqqx")])
+weaponList = Array[ExtResource("5_yq843")]([ExtResource("4_caq1d"), ExtResource("7_db4b2"), ExtResource("8_7mr4s"), ExtResource("9_ubqqx"), ExtResource("10_156a8")])
 muzzleFlash = NodePath("arm_cannon_v2/muzzleflash")
 animationPlayer = NodePath("../AnimationPlayer")
 aimcast = NodePath("../aimcast")

@@ -1,0 +1,184 @@
+[gd_scene load_steps=18 format=3 uid="uid://wfp52hhpu7ig"]
+
+[ext_resource type="Script" path="res://scenes/projectiles/player_deathray_beam.gd" id="1_grn6b"]
+[ext_resource type="AudioStream" uid="uid://cwpiq85k0jsch" path="res://assets/sounds/393374__evanboyerman__big-sci-fi-explosionbomb-close-mixed.wav" id="2_qmmaw"]
+[ext_resource type="Texture2D" uid="uid://daggrjs28hf7y" path="res://assets/star_09.png" id="3_gmul6"]
+
+[sub_resource type="Animation" id="Animation_ev5hj"]
+resource_name = "fire"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("laser_inner:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.933333, 1, 2.96667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 1, 0), Vector3(1, 1, 1), Vector3(0, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("laser_outer:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.433333, 1, 2.96667),
+"transitions": PackedFloat32Array(2, 2, 1, 1),
+"update": 0,
+"values": [Vector3(0.001, 1, 0.001), Vector3(1, 1, 1), Vector3(1, 1, 1), Vector3(0, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AudioStreamPlayer:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_0coem"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("laser_inner:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.001, 1, 0.001)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("laser_outer:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.001, 1, 0.001)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AudioStreamPlayer:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_05hmj"]
+_data = {
+"RESET": SubResource("Animation_0coem"),
+"fire": SubResource("Animation_ev5hj")
+}
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qpic0"]
+shading_mode = 0
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_wj6lf"]
+material = SubResource("StandardMaterial3D_qpic0")
+top_radius = 0.05
+bottom_radius = 0.05
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_thgyl"]
+transparency = 1
+albedo_color = Color(0, 1, 0.0390625, 0.314)
+emission_enabled = true
+emission = Color(0, 1, 0.0390625, 0.314)
+emission_energy_multiplier = 4.0
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_ei3ho"]
+material = SubResource("StandardMaterial3D_thgyl")
+top_radius = 0.07
+bottom_radius = 0.07
+
+[sub_resource type="Gradient" id="Gradient_3qklm"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_o3jr8"]
+gradient = SubResource("Gradient_3qklm")
+
+[sub_resource type="Curve" id="Curve_y701s"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -3.28995, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_k1373"]
+curve = SubResource("Curve_y701s")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_3mrhh"]
+direction = Vector3(0, 0, -1)
+spread = 10.0
+initial_velocity_min = 10.0
+initial_velocity_max = 10.0
+scale_min = 0.0
+scale_max = 0.3
+scale_curve = SubResource("CurveTexture_k1373")
+color = Color(0, 2, 0.039, 1)
+color_ramp = SubResource("GradientTexture1D_o3jr8")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dnwws"]
+transparency = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("3_gmul6")
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_oft8x"]
+material = SubResource("StandardMaterial3D_dnwws")
+
+[node name="PlayerDeathrayBeam" type="Node3D"]
+script = ExtResource("1_grn6b")
+
+[node name="RayCast3D" type="RayCast3D" parent="."]
+target_position = Vector3(0, 0, -100)
+collision_mask = 2
+hit_back_faces = false
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_qmmaw")
+volume_db = -10.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_05hmj")
+}
+
+[node name="laser_inner" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.001, 0, 0, 0, -4.37114e-08, -0.001, 0, 1, -4.37114e-11, 0.02, -0.01, 0)
+mesh = SubResource("CylinderMesh_wj6lf")
+
+[node name="laser_outer" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.001, 0, 0, 0, -4.37114e-08, -0.001, 0, 1, -4.37114e-11, 0.02, -0.01, 0)
+mesh = SubResource("CylinderMesh_ei3ho")
+skeleton = NodePath("../laser_inner")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+emitting = false
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_3mrhh")
+draw_pass_1 = SubResource("QuadMesh_oft8x")
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="adone"]
+[connection signal="finished" from="GPUParticles3D" to="." method="pdone"]
