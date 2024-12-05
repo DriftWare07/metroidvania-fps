@@ -2,11 +2,10 @@ extends Node3D
 
 var done = false
 @export var charge_time = 5
-
+@onready var raycast = $RayCast3D
 @export var damage = 150
 # Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass
+
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -18,12 +17,13 @@ func _process(delta: float) -> void:
 		show()
 		$AnimationPlayer.play("fire")
 		
-		$RayCast3D.force_raycast_update()
-		if $RayCast3D.is_colliding():
-			var cast_point = to_local($RayCast3D.get_collision_point())
-			var dist = $RayCast3D.get_collision_point().z - transform.origin.z
+		raycast.force_raycast_update()
+		if raycast.is_colliding():
+			var c = raycast.get_collider()
+			var cast_point = to_local(raycast.get_collision_point())
+			var dist = raycast.get_collision_point().z - transform.origin.z
 			
-			
+			print(c)
 			
 			$laser_inner.position.z = cast_point.z/2
 			$laser_outer.position.z = cast_point.z/2
@@ -50,8 +50,15 @@ func _process(delta: float) -> void:
 		$GPUParticles3D.restart()
 	done = true
 
+func deal():
+	if raycast.is_colliding():
+		var c = raycast.get_collider()
+		if c is hitbox and !c.is_in_group("player"):
+			c.damage(damage)
 
 func adone(anim_name: StringName) -> void:
+	
+	
 	queue_free()
 
 

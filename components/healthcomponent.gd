@@ -25,7 +25,7 @@ func _process(delta: float) -> void:
 
 
 func damage(dmg):
-	if iframes < 0: return
+	if invframes > 0: return
 	invframes = iframes
 	health -= dmg
 	damaged.emit()
