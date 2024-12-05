@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://bi331f08jt3lk"]
+[gd_scene load_steps=6 format=3 uid="uid://bi331f08jt3lk"]
 
 [ext_resource type="Script" path="res://components/healthcomponent.gd" id="1_4wq36"]
+[ext_resource type="Script" path="res://components/hitboxcomponent.gd" id="2_p54he"]
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_d0p4w"]
 
@@ -19,16 +20,17 @@ mesh = SubResource("CapsuleMesh_d0p4w")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_dtj7k")
 
-[node name="Health_Component" type="Node" parent="." node_paths=PackedStringArray("host", "areas")]
+[node name="Health_Component" type="Node" parent="." node_paths=PackedStringArray("host")]
 script = ExtResource("1_4wq36")
 host = NodePath("..")
-areas = [NodePath("../Area3D")]
 max_health = 30
 health = 30
 iframes = 0.2
 damage_group = "player_damage"
 
-[node name="Area3D" type="Area3D" parent="."]
+[node name="Area3D" type="Area3D" parent="." node_paths=PackedStringArray("healthcomp")]
+script = ExtResource("2_p54he")
+healthcomp = NodePath("../Health_Component")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
 shape = SubResource("CapsuleShape3D_cnwp2")

@@ -6,7 +6,7 @@ signal dead
 
 @export var host : Node
 @export var delete_host_on_death = true
-@export var areas : Array[Area3D]
+
 
 @export var max_health = 100
 @export var health = 100
@@ -20,21 +20,12 @@ signal dead
 var invframes = 0
 
 
+func _process(delta: float) -> void:
+	invframes -= delta
 
-func _process(delta: float):
-	
-	if invframes > 0:
-		invframes -= delta
-		return
-	for x in areas:
-		var list = x.get_overlapping_areas()
-		for y in list:
-			if y is Damage_Component and y.is_in_group(damage_group):
-				damage(y.damage)
-				y.callback()
 
 func damage(dmg):
-	
+	if iframes < 0: return
 	invframes = iframes
 	health -= dmg
 	damaged.emit()

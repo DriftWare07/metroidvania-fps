@@ -5,7 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://c5lhrhmp58evc" path="res://assets/fire_01.png" id="3_gxgne"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_k63ek"]
-radius = 0.05
+radius = 0.720919
 
 [sub_resource type="Gradient" id="Gradient_e2iyj"]
 offsets = PackedFloat32Array(0, 0.300792, 0.91029)
@@ -54,19 +54,19 @@ speed = 10
 gravity_decay = -0.01
 timeout = 1
 
-[node name="PlayerBullet" type="Area3D" parent="." groups=["player_damage"]]
+[node name="Damage_Component" type="Area3D" parent="."]
 script = ExtResource("2_x13jp")
 damage = 2
+exclusion_group = "player"
+delete_host_on_dealing_damage = false
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerBullet"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Damage_Component"]
 shape = SubResource("SphereShape3D_k63ek")
 
-[node name="GPUParticles3D" type="GPUParticles3D" parent="PlayerBullet"]
+[node name="GPUParticles3D" type="GPUParticles3D" parent="Damage_Component"]
 amount = 100
 explosiveness = 1.0
 fixed_fps = 90
 local_coords = true
 process_material = SubResource("ParticleProcessMaterial_p0yrm")
 draw_pass_1 = SubResource("QuadMesh_ibb2e")
-
-[connection signal="body_entered" from="PlayerBullet" to="." method="die_on_body"]

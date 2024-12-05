@@ -96,18 +96,20 @@ shading_mode = 0
 material = SubResource("StandardMaterial3D_qpic0")
 top_radius = 0.05
 bottom_radius = 0.05
+cap_top = false
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_thgyl"]
 transparency = 1
 albedo_color = Color(0, 1, 0.0390625, 0.314)
 emission_enabled = true
 emission = Color(0, 1, 0.0390625, 0.314)
-emission_energy_multiplier = 4.0
+emission_energy_multiplier = 16.0
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_ei3ho"]
 material = SubResource("StandardMaterial3D_thgyl")
 top_radius = 0.07
 bottom_radius = 0.07
+cap_top = false
 
 [sub_resource type="Gradient" id="Gradient_3qklm"]
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)

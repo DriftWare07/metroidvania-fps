@@ -16,6 +16,7 @@ gravity_decay = 0.05
 [node name="PlayerBullet" type="Area3D" parent="." groups=["player_damage"]]
 script = ExtResource("2_suhfl")
 damage = 3
+exclusion_group = "player"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerBullet"]
 shape = SubResource("SphereShape3D_k63ek")
