@@ -15,12 +15,12 @@ uv1_triplanar = true
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_7qbm1"]
 sky_top_color = Color(0.26865, 0.680094, 0.800339, 1)
 
-[sub_resource type="Sky" id="Sky_bqcue"]
+[sub_resource type="Sky" id="Sky_pwyh1"]
 sky_material = SubResource("ProceduralSkyMaterial_7qbm1")
 
 [sub_resource type="Environment" id="Environment_tbj01"]
 background_mode = 2
-sky = SubResource("Sky_bqcue")
+sky = SubResource("Sky_pwyh1")
 ssr_enabled = true
 ssao_enabled = true
 ssil_enabled = true

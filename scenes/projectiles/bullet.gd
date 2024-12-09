@@ -18,6 +18,16 @@ func _process(delta: float) -> void:
 	timeout -= delta
 	if timeout < 0: queue_free()
 
-func die_on_body(body):
-	if body.is_in_group("player"): return
+func die_on_body():
+	
+	spawn_sparks()
 	queue_free()
+
+func spawn_sparks():
+	print("sparks")
+	var particles = load("res://scenes/projectiles/hitSparks.tscn")
+	var p = particles.instantiate()
+	get_tree().root.add_child(p)
+	p.position = global_position
+	p.rotation = global_rotation
+	p.restart()

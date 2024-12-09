@@ -1,0 +1,52 @@
+[gd_scene load_steps=9 format=3 uid="uid://cb1qciv56s03u"]
+
+[ext_resource type="Texture2D" uid="uid://c5lhrhmp58evc" path="res://assets/fire_01.png" id="1_3te8x"]
+
+[sub_resource type="Curve" id="Curve_ixsmj"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_dxedg"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_1c8xh"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_bg8c6"]
+curve_x = SubResource("Curve_ixsmj")
+curve_y = SubResource("Curve_dxedg")
+curve_z = SubResource("Curve_1c8xh")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_bvc12"]
+particle_flag_align_y = true
+direction = Vector3(0, 1, 1)
+initial_velocity_min = 1.0
+initial_velocity_max = 10.0
+gravity = Vector3(0, -20, 0)
+scale_min = 0.1
+scale_max = 0.3
+scale_curve = SubResource("CurveXYZTexture_bg8c6")
+color = Color(2, 1, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vnxy8"]
+transparency = 1
+cull_mode = 2
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("1_3te8x")
+billboard_keep_scale = true
+
+[sub_resource type="QuadMesh" id="QuadMesh_ekua7"]
+material = SubResource("StandardMaterial3D_vnxy8")
+
+[node name="HitSparks" type="GPUParticles3D"]
+emitting = false
+amount = 10
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+fixed_fps = 60
+process_material = SubResource("ParticleProcessMaterial_bvc12")
+draw_pass_1 = SubResource("QuadMesh_ekua7")

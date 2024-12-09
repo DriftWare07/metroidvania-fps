@@ -20,6 +20,7 @@ speed = 17
 [node name="PlayerBullet" type="Area3D" parent="." groups=["player_damage"]]
 script = ExtResource("1_a7683")
 exclusion_group = "player"
+delete_host_on_dealing_damage = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerBullet"]
 shape = SubResource("SphereShape3D_k63ek")
@@ -29,4 +30,4 @@ transform = Transform3D(-0.1, 0, -8.74228e-09, 0, 0.1, 0, 8.74228e-09, 0, -0.1, 
 material_override = SubResource("ShaderMaterial_v2y8g")
 mesh = ExtResource("4_66ta0")
 
-[connection signal="body_entered" from="PlayerBullet" to="." method="die_on_body"]
+[connection signal="damageDelt" from="PlayerBullet" to="." method="die_on_body"]

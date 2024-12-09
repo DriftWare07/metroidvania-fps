@@ -12,7 +12,7 @@ config_version=5
 
 config/name="Metroidvania-fps-prototype"
 config/description="Enter an interesting project description here!"
-run/main_scene="res://gdgarden.tscn"
+run/main_scene="res://areas/test_area.tscn"
 config/features=PackedStringArray("4.3")
 config/icon="res://icon.png"
 
@@ -90,6 +90,7 @@ weapon_up={
 [physics]
 
 3d/physics_engine="JoltPhysics3D"
+jolt_3d/collisions/areas_detect_static_bodies=true
 
 [rendering]
 
