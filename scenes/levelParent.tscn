@@ -5,10 +5,10 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_uexk8"]
 shader = ExtResource("1_t3b8i")
 shader_parameter/change_color_depth = true
-shader_parameter/target_color_depth = 8
+shader_parameter/target_color_depth = 3
 shader_parameter/dithering = true
 shader_parameter/scale_resolution = true
-shader_parameter/target_resolution_scale = 3
+shader_parameter/target_resolution_scale = 2
 shader_parameter/enable_recolor = false
 
 [node name="sceneparent" type="SubViewportContainer"]

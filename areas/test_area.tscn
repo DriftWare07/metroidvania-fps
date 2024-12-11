@@ -1,13 +1,44 @@
-[gd_scene load_steps=12 format=3 uid="uid://dcufivs23yb02"]
+[gd_scene load_steps=21 format=3 uid="uid://dcufivs23yb02"]
 
 [ext_resource type="PackedScene" uid="uid://cuo8yd1giiv71" path="res://scenes/levelParent.tscn" id="1_ydlpu"]
-[ext_resource type="Texture2D" uid="uid://bxqkyln6yukk6" path="res://addons/kenney_prototype_textures/dark/texture_02.png" id="2_mdgf2"]
+[ext_resource type="Material" uid="uid://ug77jpkonf7g" path="res://assets/area textures/dark_metal.tres" id="2_yl5wb"]
 [ext_resource type="PackedScene" uid="uid://bhctlvvjdodc0" path="res://scenes/player/Player.tscn" id="3_f1kks"]
-[ext_resource type="PackedScene" uid="uid://bi331f08jt3lk" path="res://scenes/prototype/dummy.tscn" id="4_codka"]
+[ext_resource type="Texture2D" uid="uid://ctdymvtg6wvkg" path="res://assets/area textures/raw textures/s2 Tiles Rect Grey.png" id="4_1h63r"]
+[ext_resource type="Texture2D" uid="uid://c5lhrhmp58evc" path="res://assets/fire_01.png" id="4_els0y"]
+[ext_resource type="PackedScene" uid="uid://c50uep1itdn47" path="res://decor/wall_light.tscn" id="4_ykb1n"]
+[ext_resource type="Texture2D" uid="uid://dpaa4jsob2t3w" path="res://assets/area textures/raw textures/darkgreytile_normal.png" id="5_cnwt2"]
+[ext_resource type="AudioStream" uid="uid://d1bgmveh3bwl1" path="res://assets/sounds/ACambclipped.wav" id="8_bspl2"]
+[ext_resource type="Shader" uid="uid://dmffjxrq2juiw" path="res://shaders/snowplaneshader.tres" id="9_4ndnr"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pnqes"]
-albedo_texture = ExtResource("2_mdgf2")
-uv1_triplanar = true
+[sub_resource type="Curve" id="Curve_nb2ee"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.503685, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_t8j15"]
+curve = SubResource("Curve_nb2ee")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_f41mp"]
+emission_shape = 1
+emission_sphere_radius = 10.0
+angle_min = 1.07288e-05
+angle_max = 360.0
+gravity = Vector3(0, -0.1, 0)
+scale_min = 0.01
+scale_max = 0.1
+scale_curve = SubResource("CurveTexture_t8j15")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kmdie"]
+transparency = 1
+shading_mode = 0
+albedo_texture = ExtResource("4_els0y")
+billboard_mode = 3
+billboard_keep_scale = true
+particles_anim_h_frames = 1
+particles_anim_v_frames = 1
+particles_anim_loop = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_qe1m1"]
+material = SubResource("StandardMaterial3D_kmdie")
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_lttrt"]
 sky_top_color = Color(0.26865, 0.680094, 0.800339, 1)
@@ -17,62 +48,89 @@ sky_material = SubResource("ProceduralSkyMaterial_lttrt")
 
 [sub_resource type="Environment" id="Environment_g17qt"]
 background_mode = 2
+background_energy_multiplier = 0.0
 sky = SubResource("Sky_bqcue")
 ssr_enabled = true
 ssao_enabled = true
 ssil_enabled = true
 sdfgi_enabled = true
 glow_enabled = true
+volumetric_fog_enabled = true
+volumetric_fog_emission_energy = 0.0
 
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_d0p4w"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_umhi0"]
+albedo_texture = ExtResource("4_1h63r")
+normal_enabled = true
+normal_scale = 0.1
+normal_texture = ExtResource("5_cnwt2")
+uv1_triplanar = true
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_dtj7k"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lmakn"]
+render_priority = 0
+shader = ExtResource("9_4ndnr")
+shader_parameter/scale = 16.39
+shader_parameter/height = 1.0
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_501ld"]
-transparency = 1
-albedo_color = Color(1, 1, 1, 0.416)
+[sub_resource type="PlaneMesh" id="PlaneMesh_nxve4"]
+material = SubResource("ShaderMaterial_lmakn")
+size = Vector2(100, 100)
+subdivide_width = 100
+subdivide_depth = 100
 
 [node name="sceneparent" instance=ExtResource("1_ydlpu")]
 
 [node name="CSGBox3D" type="CSGBox3D" parent="SubViewport/worldParent" index="0"]
-material_override = SubResource("StandardMaterial3D_pnqes")
+material_override = ExtResource("2_yl5wb")
 use_collision = true
 size = Vector3(100, 1, 100)
 
 [node name="Basic FPS Player" parent="SubViewport/worldParent" index="1" instance=ExtResource("3_f1kks")]
 
+[node name="GPUParticles3D" type="GPUParticles3D" parent="SubViewport/worldParent/Basic FPS Player" index="5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+amount = 250
+lifetime = 2.0
+process_material = SubResource("ParticleProcessMaterial_f41mp")
+draw_pass_1 = SubResource("QuadMesh_qe1m1")
+
 [node name="WorldEnvironment" type="WorldEnvironment" parent="SubViewport/worldParent" index="2"]
 environment = SubResource("Environment_g17qt")
 
-[node name="dummy" parent="SubViewport/worldParent" index="3" instance=ExtResource("4_codka")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.87471, 1.63603, -5.02596)
+[node name="protoCSGParent" type="Node3D" parent="SubViewport/worldParent" index="3"]
 
-[node name="dummy2" parent="SubViewport/worldParent" index="4" instance=ExtResource("4_codka")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.39836, 1.63603, -0.822718)
+[node name="CSGPolygon3D" type="CSGPolygon3D" parent="SubViewport/worldParent/protoCSGParent" index="0"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 4.29568, 0)
+material_override = SubResource("StandardMaterial3D_umhi0")
+polygon = PackedVector2Array(2.08817, -1.42948, 2, 21, -3, 21, -2.16274, -1.48096, -3.51948, -1.47552, -4, 22, 3, 22, 3.16021, -1.3914, 3.0074, -1.39436)
+depth = 4.0
 
-[node name="dummy3" type="CharacterBody3D" parent="SubViewport/worldParent" index="5" groups=["enemy"]]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.03866, 1.63603, -7.50656)
+[node name="WallLight" parent="SubViewport/worldParent/protoCSGParent/CSGPolygon3D" index="0" instance=ExtResource("4_ykb1n")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.18889, -0.0498852, -0.628281)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="SubViewport/worldParent/dummy3" index="0"]
-mesh = SubResource("CapsuleMesh_d0p4w")
+[node name="WallLight3" parent="SubViewport/worldParent/protoCSGParent/CSGPolygon3D" index="1" instance=ExtResource("4_ykb1n")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.53673, 9.12133, -0.628281)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="SubViewport/worldParent/dummy3" index="1"]
-shape = SubResource("CapsuleShape3D_dtj7k")
+[node name="WallLight5" parent="SubViewport/worldParent/protoCSGParent/CSGPolygon3D" index="2" instance=ExtResource("4_ykb1n")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.85295, 17.8954, -0.62828)
 
-[node name="dummy4" parent="SubViewport/worldParent" index="6" instance=ExtResource("4_codka")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.63488, 1.63603, -5.92391)
+[node name="WallLight2" parent="SubViewport/worldParent/protoCSGParent/CSGPolygon3D" index="3" instance=ExtResource("4_ykb1n")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.07644, -0.0498852, -0.628281)
 
-[node name="dummy5" parent="SubViewport/worldParent" index="7" instance=ExtResource("4_codka")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.74372, 1.63603, -0.16532)
+[node name="WallLight4" parent="SubViewport/worldParent/protoCSGParent/CSGPolygon3D" index="4" instance=ExtResource("4_ykb1n")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.94548, 9.12133, -0.628281)
 
-[node name="dummy6" parent="SubViewport/worldParent" index="8" instance=ExtResource("4_codka")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.51642, 1.63603, 4.03172)
+[node name="WallLight6" parent="SubViewport/worldParent/protoCSGParent/CSGPolygon3D" index="5" instance=ExtResource("4_ykb1n")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.92748, 17.8954, -0.62828)
 
-[node name="dummy7" parent="SubViewport/worldParent" index="9" instance=ExtResource("4_codka")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0202994, 1.63603, 5.60778)
+[node name="CSGBox3D" type="CSGBox3D" parent="SubViewport/worldParent/protoCSGParent" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.66431, -9.81223)
+size = Vector3(6, 1, 25)
+material = ExtResource("2_yl5wb")
 
-[node name="CSGBox3D2" type="CSGBox3D" parent="SubViewport/worldParent" index="10"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.01646, 1.72192, 3.81965)
-material_override = SubResource("StandardMaterial3D_501ld")
-use_collision = true
-size = Vector3(1, 3.27002, 1)
+[node name="ambienceplayer" type="AudioStreamPlayer" parent="SubViewport/worldParent" index="4"]
+stream = ExtResource("8_bspl2")
+autoplay = true
+
+[node name="snow" type="MeshInstance3D" parent="SubViewport/worldParent" index="5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.173822, 0)
+mesh = SubResource("PlaneMesh_nxve4")

@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://c50uep1itdn47"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_obaq5"]
+shading_mode = 0
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_okpcq"]
+material = SubResource("StandardMaterial3D_obaq5")
+uv2_padding = 0.0
+radius = 0.1
+height = 0.5
+radial_segments = 8
+rings = 1
+
+[node name="WallLight" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_okpcq")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]

@@ -53,6 +53,10 @@ func _enter_tree():
 @export var UPDATE_PLAYER_ON_PHYS_STEP := true	# When check player is moved and rotated in _physics_process (fixed fps)
 												# Otherwise player is updated in _process (uncapped)
 
+signal step
+@export var step_delay = 0.1
+var sd = 0.1
+
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 # To keep track of current speed and acceleration
@@ -104,6 +108,8 @@ func _process(delta):
 		move_player(delta)
 		rotate_player(delta)
 
+
+
 func _input(event):
 	if Engine.is_editor_hint():
 		return
@@ -152,6 +158,12 @@ func move_player(delta):
 	# Get the input direction and handle the movement/deceleration.
 	var input_dir = Input.get_vector(KEY_BIND_LEFT, KEY_BIND_RIGHT, KEY_BIND_UP, KEY_BIND_DOWN)
 	var direction = (transform.basis * Vector3(input_dir.x, 0, input_dir.y)).normalized()
+	
+	if input_dir.length() > 0:
+		sd -= delta
+	if sd < 0:
+		step.emit()
+		sd = step_delay
 	
 	velocity.x = move_toward(velocity.x, direction.x * speed, accel * delta)
 	velocity.z = move_toward(velocity.z, direction.z * speed, accel * delta)

@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://bhctlvvjdodc0"]
+[gd_scene load_steps=37 format=3 uid="uid://bhctlvvjdodc0"]
 
 [ext_resource type="Script" path="res://addons/Basic FPS Player/Src/basic_player_startup.gd" id="1_2sght"]
 [ext_resource type="PackedScene" uid="uid://kmyakts4l64t" path="res://addons/Basic FPS Player/Src/basic_player_head.tscn" id="2_ile1v"]
@@ -20,6 +20,7 @@
 [ext_resource type="Texture2D" uid="uid://6cqnaoe3i3o1" path="res://icon.png" id="16_nxr56"]
 [ext_resource type="Script" path="res://components/hitboxcomponent.gd" id="17_e7tud"]
 [ext_resource type="Script" path="res://scenes/player/statspanel.gd" id="20_k2syj"]
+[ext_resource type="AudioStream" uid="uid://dblk32v0h4i27" path="res://assets/sounds/footsteps/snow_footsteps.tres" id="21_ggmn5"]
 
 [sub_resource type="Gradient" id="Gradient_7uqg1"]
 offsets = PackedFloat32Array(0, 0.472296, 1)
@@ -197,11 +198,14 @@ height = 2.1
 [node name="Basic FPS Player" type="CharacterBody3D" groups=["player", "player_damage"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 script = ExtResource("1_2sght")
+SPEED = 3.0
+ACCEL = 25.0
 KEY_BIND_UP = "forward"
 KEY_BIND_LEFT = "left"
 KEY_BIND_RIGHT = "right"
 KEY_BIND_DOWN = "back"
 KEY_BIND_JUMP = "jump"
+step_delay = 0.5
 
 [node name="Head" parent="." instance=ExtResource("2_ile1v")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.412659, 0)
@@ -258,6 +262,13 @@ transform = Transform3D(-0.965926, 0.258819, -1.50996e-07, 0.258819, 0.965926, 2
 visible = false
 light_color = Color(1, 0.609375, 0, 1)
 shadow_enabled = true
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Head/cannon/arm_cannon_v2"]
+transform = Transform3D(1, 8.74228e-08, -8.74228e-08, 8.74228e-08, -1, 8.74228e-08, -8.74228e-08, -8.74228e-08, -1, 5.96046e-08, 0, 0.539532)
+light_energy = 2.0
+shadow_enabled = true
+spot_range = 30.0
+spot_attenuation = 2.0
 
 [node name="aimcast" type="RayCast3D" parent="Head"]
 target_position = Vector3(0, 0, -1000)
@@ -361,6 +372,10 @@ theme_override_font_sizes/font_size = 32
 text = "Health
 "
 
+[node name="footsteps" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("21_ggmn5")
+
+[connection signal="step" from="." to="footsteps" method="play"]
 [connection signal="damaged" from="Health_Component" to="Health_Component/damagesound" method="play"]
 
 [editable path="Head"]

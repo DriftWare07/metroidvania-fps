@@ -1,0 +1,12 @@
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://ug77jpkonf7g"]
+
+[ext_resource type="Texture2D" uid="uid://c1dnvxev4m2qa" path="res://assets/area textures/raw textures/s2 Metal Grid 3 box.png" id="1_i5eod"]
+[ext_resource type="Texture2D" uid="uid://cs1fxacb1h3pp" path="res://assets/area textures/raw textures/metal_norm.png" id="2_kp41d"]
+
+[resource]
+albedo_color = Color(0.371094, 0.24353, 0.24353, 1)
+albedo_texture = ExtResource("1_i5eod")
+metallic = 0.05
+normal_enabled = true
+normal_texture = ExtResource("2_kp41d")
+uv1_triplanar = true

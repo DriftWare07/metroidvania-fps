@@ -1,0 +1,15 @@
+[gd_resource type="AudioStreamRandomizer" load_steps=6 format=3 uid="uid://dblk32v0h4i27"]
+
+[ext_resource type="AudioStream" uid="uid://unurhrx41xrt" path="res://assets/sounds/footsteps/snow/snowstep1.wav" id="1_3i3t2"]
+[ext_resource type="AudioStream" uid="uid://c2cx2faxi1wlk" path="res://assets/sounds/footsteps/snow/snowstep2.wav" id="2_mr5i3"]
+[ext_resource type="AudioStream" uid="uid://p56ojp0i8p6c" path="res://assets/sounds/footsteps/snow/snowstep3.wav" id="3_57f1q"]
+[ext_resource type="AudioStream" uid="uid://csvi8wo4ka6aj" path="res://assets/sounds/footsteps/snow/snowstep4.wav" id="4_e5jly"]
+[ext_resource type="AudioStream" uid="uid://cfmcth8rqtpai" path="res://assets/sounds/footsteps/snow/snowstep5.wav" id="5_ghkgj"]
+
+[resource]
+streams_count = 5
+stream_0/stream = ExtResource("1_3i3t2")
+stream_1/stream = ExtResource("2_mr5i3")
+stream_2/stream = ExtResource("3_57f1q")
+stream_3/stream = ExtResource("4_e5jly")
+stream_4/stream = ExtResource("5_ghkgj")
