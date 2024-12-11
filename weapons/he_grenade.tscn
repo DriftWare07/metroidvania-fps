@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://bxqchtcclgleg"]
+
+[ext_resource type="Script" path="res://weapons/he_grenade.gd" id="1_iiegq"]
+[ext_resource type="PackedScene" uid="uid://cf4towtsjef2y" path="res://assets/models/grenade/grenade.glb" id="1_xyiny"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_30s14"]
+radius = 0.0994846
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_hfh38"]
+radius = 2.46181
+
+[node name="HeGrenade" type="RigidBody3D"]
+collision_layer = 2
+collision_mask = 2
+mass = 0.1
+script = ExtResource("1_iiegq")
+velocity = 1
+explosionforce = 100
+
+[node name="grenade" parent="." instance=ExtResource("1_xyiny")]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_30s14")
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("SphereShape3D_hfh38")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="explode"]

@@ -5,6 +5,9 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_28tl3"]
 
 [node name="Buttoncube" type="RigidBody3D" groups=["grab"]]
+collision_layer = 3
+collision_mask = 3
+mass = 10.0
 linear_damp = 0.5
 angular_damp = 0.5
 

@@ -197,6 +197,7 @@ height = 2.1
 
 [node name="Basic FPS Player" type="CharacterBody3D" groups=["player", "player_damage"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+collision_layer = 2
 script = ExtResource("1_2sght")
 SPEED = 3.0
 ACCEL = 25.0
@@ -270,6 +271,9 @@ shadow_enabled = true
 spot_range = 30.0
 spot_attenuation = 2.0
 
+[node name="grenade_point" type="Node3D" parent="Head/cannon"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.555189, -0.132276, 0)
+
 [node name="aimcast" type="RayCast3D" parent="Head"]
 target_position = Vector3(0, 0, -1000)
 
@@ -334,7 +338,8 @@ grow_vertical = 0
 
 [node name="weapon" type="Label" parent="CanvasLayer/Control/weaponpanel"]
 layout_mode = 1
-offset_right = 190.0
+offset_left = 13.0
+offset_right = 241.0
 offset_bottom = 48.0
 theme_override_font_sizes/font_size = 32
 text = "Weapon Name"
@@ -366,7 +371,8 @@ healthcomp = NodePath("../../../Health_Component")
 
 [node name="Label" type="Label" parent="CanvasLayer/Control/statspanel"]
 layout_mode = 0
-offset_right = 154.0
+offset_left = 11.0
+offset_right = 370.0
 offset_bottom = 62.0
 theme_override_font_sizes/font_size = 32
 text = "Health

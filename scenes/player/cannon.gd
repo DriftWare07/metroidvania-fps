@@ -35,6 +35,10 @@ var sway_lerp = 5
 @export var sway_down : Vector3
 @export var sway_normal : Vector3
 
+
+#grenade
+@onready var grenade = load("res://weapons/he_grenade.tscn")
+
 func _ready() -> void:
 	weapon = weaponList[current_weapon]
 	switchWeapon(0)
@@ -67,6 +71,18 @@ func _process(delta: float) -> void:
 			cam._camera_shake()
 			muzzleFlash.restart()
 			sound.play()
+		
+	
+	if Input.is_action_just_pressed("grenade") and not isGrabbing:
+		
+		var g = grenade.instantiate()
+		get_tree().root.add_child(g)
+		
+		g.global_position = $grenade_point.global_position
+		
+		g.rotation = global_rotation
+		g.chuck()
+		
 		
 	
 	if Input.is_action_just_released("weapon_up"): switchWeapon(1)

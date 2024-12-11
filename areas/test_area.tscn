@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://dcufivs23yb02"]
+[gd_scene load_steps=22 format=3 uid="uid://dcufivs23yb02"]
 
 [ext_resource type="PackedScene" uid="uid://cuo8yd1giiv71" path="res://scenes/levelParent.tscn" id="1_ydlpu"]
 [ext_resource type="Material" uid="uid://ug77jpkonf7g" path="res://assets/area textures/dark_metal.tres" id="2_yl5wb"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://dpaa4jsob2t3w" path="res://assets/area textures/raw textures/darkgreytile_normal.png" id="5_cnwt2"]
 [ext_resource type="AudioStream" uid="uid://d1bgmveh3bwl1" path="res://assets/sounds/ACambclipped.wav" id="8_bspl2"]
 [ext_resource type="Shader" uid="uid://dmffjxrq2juiw" path="res://shaders/snowplaneshader.tres" id="9_4ndnr"]
+[ext_resource type="PackedScene" uid="uid://dm7s0ya1ht1dr" path="res://scenes/props/buttoncube.tscn" id="11_vhykd"]
 
 [sub_resource type="Curve" id="Curve_nb2ee"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.503685, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -82,6 +83,7 @@ subdivide_depth = 100
 [node name="CSGBox3D" type="CSGBox3D" parent="SubViewport/worldParent" index="0"]
 material_override = ExtResource("2_yl5wb")
 use_collision = true
+collision_layer = 3
 size = Vector3(100, 1, 100)
 
 [node name="Basic FPS Player" parent="SubViewport/worldParent" index="1" instance=ExtResource("3_f1kks")]
@@ -101,6 +103,9 @@ environment = SubResource("Environment_g17qt")
 [node name="CSGPolygon3D" type="CSGPolygon3D" parent="SubViewport/worldParent/protoCSGParent" index="0"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 4.29568, 0)
 material_override = SubResource("StandardMaterial3D_umhi0")
+use_collision = true
+collision_layer = 3
+collision_mask = 3
 polygon = PackedVector2Array(2.08817, -1.42948, 2, 21, -3, 21, -2.16274, -1.48096, -3.51948, -1.47552, -4, 22, 3, 22, 3.16021, -1.3914, 3.0074, -1.39436)
 depth = 4.0
 
@@ -124,6 +129,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.92748, 17.8954, -0.62828)
 
 [node name="CSGBox3D" type="CSGBox3D" parent="SubViewport/worldParent/protoCSGParent" index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.66431, -9.81223)
+use_collision = true
+collision_layer = 3
+collision_mask = 3
 size = Vector3(6, 1, 25)
 material = ExtResource("2_yl5wb")
 
@@ -133,4 +141,20 @@ autoplay = true
 
 [node name="snow" type="MeshInstance3D" parent="SubViewport/worldParent" index="5"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.173822, 0)
+visible = false
 mesh = SubResource("PlaneMesh_nxve4")
+
+[node name="Buttoncube" parent="SubViewport/worldParent" index="6" instance=ExtResource("11_vhykd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.312871, 1.20681, 10.2292)
+
+[node name="Buttoncube2" parent="SubViewport/worldParent" index="7" instance=ExtResource("11_vhykd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.312871, 1.20681, 11.3835)
+
+[node name="Buttoncube3" parent="SubViewport/worldParent" index="8" instance=ExtResource("11_vhykd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.01723, 1.20681, 11.3835)
+
+[node name="Buttoncube4" parent="SubViewport/worldParent" index="9" instance=ExtResource("11_vhykd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.01723, 1.20681, 10.1755)
+
+[node name="Buttoncube5" parent="SubViewport/worldParent" index="10" instance=ExtResource("11_vhykd")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.312137, 2.44177, 10.8065)
