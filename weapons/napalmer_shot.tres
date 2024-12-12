@@ -1,13 +1,15 @@
-[gd_resource type="Resource" script_class="weaponData" load_steps=4 format=3 uid="uid://bsves1hlyry6r"]
+[gd_resource type="Resource" script_class="weaponData" load_steps=5 format=3 uid="uid://bsves1hlyry6r"]
 
 [ext_resource type="PackedScene" uid="uid://fmgl7iwmoswq" path="res://scenes/projectiles/player_napalm.tscn" id="1_50yov"]
 [ext_resource type="Script" path="res://components/weaponData.gd" id="1_x8adq"]
+[ext_resource type="Texture2D" uid="uid://c1eyvgmci47oe" path="res://weapons/flamer_icon.png" id="3_34w5v"]
 
 [sub_resource type="AudioStream" id="AudioStream_sjsr1"]
 
 [resource]
 script = ExtResource("1_x8adq")
 weapon_name = "Napalmer"
+weapon_icon = ExtResource("3_34w5v")
 projectile_scene = ExtResource("1_50yov")
 cooldown = 0.05
 sound = SubResource("AudioStream_sjsr1")
