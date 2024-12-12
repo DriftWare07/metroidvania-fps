@@ -30,4 +30,10 @@ transform = Transform3D(-0.1, 0, -8.74228e-09, 0, 0.1, 0, 8.74228e-09, 0, -0.1, 
 material_override = SubResource("ShaderMaterial_v2y8g")
 mesh = ExtResource("4_66ta0")
 
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+light_color = Color(0.6, 1.3, 2, 1)
+light_energy = 0.2
+shadow_enabled = true
+omni_range = 2.83267
+
 [connection signal="damageDelt" from="PlayerBullet" to="." method="die_on_body"]

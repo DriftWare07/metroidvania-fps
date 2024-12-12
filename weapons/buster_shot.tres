@@ -1,12 +1,15 @@
-[gd_resource type="Resource" script_class="weaponData" load_steps=4 format=3 uid="uid://c1g6odcqyo4pq"]
+[gd_resource type="Resource" script_class="weaponData" load_steps=5 format=3 uid="uid://c1g6odcqyo4pq"]
 
 [ext_resource type="PackedScene" uid="uid://duy4lx1plrb7e" path="res://scenes/projectiles/player_bullet.tscn" id="1_7wcv1"]
 [ext_resource type="Script" path="res://components/weaponData.gd" id="2_waqwe"]
 [ext_resource type="AudioStream" uid="uid://jl43o1df0hy" path="res://assets/sounds/730564__tradeachest__scifi_gun_blast.wav" id="3_e7a2o"]
+[ext_resource type="Texture2D" uid="uid://cbbn4vf8thvu7" path="res://weapons/buster_icon.png" id="4_frghd"]
 
 [resource]
 script = ExtResource("2_waqwe")
 weapon_name = "Buster"
+weapon_icon = ExtResource("4_frghd")
 projectile_scene = ExtResource("1_7wcv1")
 cooldown = 0.4
 sound = ExtResource("3_e7a2o")
+no_anim = false

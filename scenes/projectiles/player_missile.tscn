@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://bflk4r5hahsm2"]
+[gd_scene load_steps=9 format=3 uid="uid://bflk4r5hahsm2"]
 
 [ext_resource type="Script" path="res://scenes/projectiles/player_missile.gd" id="1_c4yt4"]
 [ext_resource type="Script" path="res://components/damagecomponent.gd" id="2_5k8xi"]
@@ -11,6 +11,9 @@ radius = 0.05
 
 [sub_resource type="QuadMesh" id="QuadMesh_okqeu"]
 material = ExtResource("5_pyjsm")
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_qj2dp"]
+radius = 1.10839
 
 [node name="player_missile" type="Node3D" groups=["damage"]]
 script = ExtResource("1_c4yt4")
@@ -37,4 +40,10 @@ local_coords = true
 process_material = ExtResource("4_snd38")
 draw_pass_1 = SubResource("QuadMesh_okqeu")
 
+[node name="explosionradius" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="explosionradius"]
+shape = SubResource("SphereShape3D_qj2dp")
+
 [connection signal="body_entered" from="PlayerBullet" to="." method="die_on_body"]
+[connection signal="damageDelt" from="PlayerBullet" to="." method="explode"]

@@ -1,12 +1,15 @@
-[gd_resource type="Resource" script_class="weaponData" load_steps=4 format=3 uid="uid://c70iqw802rab2"]
+[gd_resource type="Resource" script_class="weaponData" load_steps=5 format=3 uid="uid://c70iqw802rab2"]
 
 [ext_resource type="PackedScene" uid="uid://bflk4r5hahsm2" path="res://scenes/projectiles/player_missile.tscn" id="1_hyrha"]
 [ext_resource type="Script" path="res://components/weaponData.gd" id="2_k8sbp"]
 [ext_resource type="AudioStream" uid="uid://boicmomo1jbew" path="res://assets/sounds/18386__inferno__lightrl.wav" id="3_ahggm"]
+[ext_resource type="Texture2D" uid="uid://dcsag0ytlvdv7" path="res://weapons/rocket_icon.png" id="4_dfm21"]
 
 [resource]
 script = ExtResource("2_k8sbp")
 weapon_name = "Homing Missile"
+weapon_icon = ExtResource("4_dfm21")
 projectile_scene = ExtResource("1_hyrha")
 cooldown = 0.7
 sound = ExtResource("3_ahggm")
+no_anim = false

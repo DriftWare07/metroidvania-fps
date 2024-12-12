@@ -101,6 +101,7 @@ func switchWeapon(to):
 	weapon = weaponList[current_weapon]
 	if weapon.sound: sound.stream = weapon.sound
 	ui_label.text = weapon.weapon_name
+	if weapon.weapon_icon != null: ui_icon.texture = weapon.weapon_icon
 	cooldown = 0
 
 func grabObjects():
