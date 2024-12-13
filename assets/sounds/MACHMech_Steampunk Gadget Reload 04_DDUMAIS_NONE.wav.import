@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://isdy3w3am405"
+path="res://.godot/imported/MACHMech_Steampunk Gadget Reload 04_DDUMAIS_NONE.wav-2254081c54047d19b5ff443d7d774058.sample"
+
+[deps]
+
+source_file="res://assets/sounds/MACHMech_Steampunk Gadget Reload 04_DDUMAIS_NONE.wav"
+dest_files=["res://.godot/imported/MACHMech_Steampunk Gadget Reload 04_DDUMAIS_NONE.wav-2254081c54047d19b5ff443d7d774058.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

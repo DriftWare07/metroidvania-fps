@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://2fkkh8skgp6h"]
+
+[ext_resource type="Script" path="res://scenes/switches/switchhandler.gd" id="1_s2fsi"]
+[ext_resource type="Script" path="res://components/hitboxcomponent.gd" id="1_soxou"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_56y3i"]
+height = 0.31076
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_ts136"]
+height = 0.3
+
+[node name="DamageSwitch" type="StaticBody3D"]
+script = ExtResource("1_s2fsi")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+shape = SubResource("CylinderShape3D_56y3i")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+mesh = SubResource("CylinderMesh_ts136")
+
+[node name="hitbox" type="Area3D" parent="."]
+script = ExtResource("1_soxou")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="hitbox"]
+transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, 0, 0)
+shape = SubResource("CylinderShape3D_56y3i")
+
+[connection signal="damaged" from="hitbox" to="." method="toggle"]
