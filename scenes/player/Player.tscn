@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://bhctlvvjdodc0"]
+[gd_scene load_steps=38 format=3 uid="uid://bhctlvvjdodc0"]
 
 [ext_resource type="Script" path="res://addons/Basic FPS Player/Src/basic_player_startup.gd" id="1_2sght"]
 [ext_resource type="PackedScene" uid="uid://kmyakts4l64t" path="res://addons/Basic FPS Player/Src/basic_player_head.tscn" id="2_ile1v"]
@@ -17,6 +17,7 @@
 [ext_resource type="Resource" uid="uid://bsves1hlyry6r" path="res://weapons/napalmer_shot.tres" id="9_ubqqx"]
 [ext_resource type="Resource" uid="uid://b7g8n6n21fhfx" path="res://weapons/deathray_shot.tres" id="10_156a8"]
 [ext_resource type="AudioStream" uid="uid://dcsl8ynvmdr77" path="res://assets/sounds/metal_impact_3.wav" id="10_gglt7"]
+[ext_resource type="AudioStream" uid="uid://cvjce0vfmrm7h" path="res://assets/sounds/Bluezone_BC0277_cartridge_case_handling_018.wav" id="13_k4117"]
 [ext_resource type="Texture2D" uid="uid://6cqnaoe3i3o1" path="res://icon.png" id="16_nxr56"]
 [ext_resource type="Script" path="res://components/hitboxcomponent.gd" id="17_e7tud"]
 [ext_resource type="Script" path="res://scenes/player/statspanel.gd" id="20_k2syj"]
@@ -273,6 +274,10 @@ spot_attenuation = 2.0
 
 [node name="grenade_point" type="Node3D" parent="Head/cannon"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.555189, -0.132276, 0)
+
+[node name="grenadethrow" type="AudioStreamPlayer" parent="Head/cannon/grenade_point"]
+stream = ExtResource("13_k4117")
+max_polyphony = 10
 
 [node name="aimcast" type="RayCast3D" parent="Head"]
 target_position = Vector3(0, 0, -1000)

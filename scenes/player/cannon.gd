@@ -82,7 +82,7 @@ func _process(delta: float) -> void:
 		
 		g.rotation = global_rotation
 		g.chuck()
-		
+		$grenade_point/grenadethrow.play()
 		
 	
 	if Input.is_action_just_released("weapon_up"): switchWeapon(1)

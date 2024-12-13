@@ -4,14 +4,14 @@
 [ext_resource type="Texture2D" uid="uid://c5lhrhmp58evc" path="res://assets/fire_01.png" id="1_mbisk"]
 [ext_resource type="Texture2D" uid="uid://dmtdkj8hw6mh2" path="res://assets/scorch_02.png" id="2_k61bq"]
 [ext_resource type="Texture2D" uid="uid://bel5plenbe72p" path="res://assets/smoke_01.png" id="3_yj7j5"]
-[ext_resource type="AudioStream" uid="uid://bspvlfyvnouq1" path="res://assets/sounds/665094__tgerginov__deep-hit-explosion.wav" id="5_2tlrs"]
+[ext_resource type="AudioStream" uid="uid://b1b2v4k8vc8ms" path="res://assets/sounds/Bluezone_BC0277_explosion_urban_004_02.wav" id="5_w6l0k"]
 
 [sub_resource type="Curve" id="Curve_ixsmj"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+_data = [Vector2(0.493857, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="Curve" id="Curve_dxedg"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+_data = [Vector2(0.481572, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="Curve" id="Curve_1c8xh"]
@@ -24,6 +24,7 @@ curve_y = SubResource("Curve_dxedg")
 curve_z = SubResource("Curve_1c8xh")
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_mcofo"]
+lifetime_randomness = 0.3
 particle_flag_align_y = true
 direction = Vector3(0, 1, 0)
 spread = 180.0
@@ -66,7 +67,7 @@ gravity = Vector3(0, 0, 0)
 scale_min = 4.0
 scale_max = 4.0
 scale_curve = SubResource("CurveTexture_njg8q")
-color = Color(2.5, 1, 0.5, 1)
+color = Color(1, 0.609375, 0, 1)
 color_ramp = SubResource("GradientTexture1D_lv8p5")
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ar812"]
@@ -122,15 +123,18 @@ script = ExtResource("1_22k0c")
 emitters = [NodePath("sparks"), NodePath("flash"), NodePath("smoke"), NodePath("explosion")]
 
 [node name="sparks" type="GPUParticles3D" parent="."]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 emitting = false
 amount = 100
-lifetime = 0.5
+interp_to_end = 0.18
 one_shot = true
 explosiveness = 1.0
+fixed_fps = 60
 process_material = SubResource("ParticleProcessMaterial_mcofo")
 draw_pass_1 = SubResource("QuadMesh_lsx53")
 
 [node name="flash" type="GPUParticles3D" parent="."]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 emitting = false
 amount = 1
 one_shot = true
@@ -140,6 +144,7 @@ process_material = SubResource("ParticleProcessMaterial_sqr4q")
 draw_pass_1 = SubResource("QuadMesh_glygr")
 
 [node name="smoke" type="GPUParticles3D" parent="."]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
 emitting = false
 amount = 20
 lifetime = 2.0
@@ -150,7 +155,7 @@ process_material = SubResource("ParticleProcessMaterial_u8tr0")
 draw_pass_1 = SubResource("QuadMesh_2gt3p")
 
 [node name="explosion" type="AudioStreamPlayer3D" parent="."]
-stream = ExtResource("5_2tlrs")
+stream = ExtResource("5_w6l0k")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_nth3q")
