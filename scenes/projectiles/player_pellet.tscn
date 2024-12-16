@@ -8,12 +8,12 @@
 [sub_resource type="SphereShape3D" id="SphereShape3D_k63ek"]
 radius = 0.03
 
-[node name="player_pellet" type="Node3D"]
+[node name="player_pellet" type="Node3D" groups=["pellet"]]
 script = ExtResource("1_pcwkb")
 speed = 17
 gravity_decay = 0.05
 
-[node name="PlayerBullet" type="Area3D" parent="." groups=["player_damage"]]
+[node name="PlayerBullet" type="Area3D" parent="." groups=["pellet", "player_damage"]]
 script = ExtResource("2_suhfl")
 damage = 15
 exclusion_group = "player"

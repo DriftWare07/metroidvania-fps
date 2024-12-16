@@ -14,7 +14,7 @@ config/name="Metroidvania-fps-prototype"
 config/description="Enter an interesting project description here!"
 run/main_scene="res://areas/test_area.tscn"
 config/features=PackedStringArray("4.3")
-config/icon="res://icon.png"
+config/icon="res://gameicon.png"
 
 [autoload]
 
@@ -30,6 +30,17 @@ window/stretch/aspect="keep_height"
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/Basic FPS Player/plugin.cfg", "res://addons/anthonyec.camera_preview/plugin.cfg")
+
+[file_customization]
+
+folder_colors={
+"res://areas/": "purple",
+"res://assets/": "orange",
+"res://components/": "blue",
+"res://decor/": "green",
+"res://scenes/": "red",
+"res://weapons/": "red"
+}
 
 [global_group]
 

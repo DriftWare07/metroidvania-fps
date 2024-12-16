@@ -1,0 +1,212 @@
+[gd_scene load_steps=16 format=3 uid="uid://dnrf751lqc268"]
+
+[ext_resource type="PackedScene" uid="uid://0nho5xcvrg3" path="res://scenes/doors/switchDoor.tscn" id="1_c8hh0"]
+[ext_resource type="Texture2D" uid="uid://n2kyvg3kwyk6" path="res://assets/models/Textures/s2 Metal 01 Grey 01 Lines Diagonal.png" id="2_5jhif"]
+[ext_resource type="Material" uid="uid://b3lg727ugh7er" path="res://scenes/doors/lock_holo.tres" id="2_c0la0"]
+[ext_resource type="Texture2D" uid="uid://cs1fxacb1h3pp" path="res://assets/area textures/raw textures/metal_norm.png" id="2_swg74"]
+[ext_resource type="Texture2D" uid="uid://54ikoogs1sn3" path="res://assets/models/Textures/locked.png" id="2_vfdg8"]
+[ext_resource type="Texture2D" uid="uid://iks1b1tmxbu0" path="res://assets/models/Textures/metalgraylinesdiagonal_normal.png" id="3_rwe8y"]
+[ext_resource type="Material" uid="uid://d1dh2aas18yik" path="res://scenes/doors/unlock_holo.tres" id="4_c3ekc"]
+[ext_resource type="AudioStream" uid="uid://kpni5lniufe7" path="res://assets/sounds/CYBERDECK_General_UI_18.wav" id="5_djgl0"]
+[ext_resource type="AudioStream" uid="uid://oo6x37ds4dgo" path="res://assets/sounds/CYBERDECK_Outro_2.wav" id="6_ovha4"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_aw8nn"]
+albedo_color = Color(0.356644, 0.521925, 0.621094, 1)
+albedo_texture = ExtResource("2_5jhif")
+normal_enabled = true
+normal_scale = 0.3
+normal_texture = ExtResource("3_rwe8y")
+uv1_triplanar = true
+uv1_world_triplanar = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uwpls"]
+albedo_color = Color(0.363281, 0.363281, 0.363281, 1)
+metallic = 1.0
+roughness = 0.5
+normal_enabled = true
+normal_scale = 0.3
+normal_texture = ExtResource("2_swg74")
+uv1_triplanar = true
+
+[sub_resource type="Animation" id="Animation_lsvgj"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("icon:material_override")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_c0la0")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("icon2:material_override")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_c0la0")]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("unlocksound:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("locksound:playing")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_v3nan"]
+resource_name = "lock"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("icon:material_override")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_c0la0")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("icon2:material_override")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_c0la0")]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("locksound:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_yqo2h"]
+resource_name = "unlock"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("icon:material_override")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("4_c3ekc")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("icon2:material_override")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("4_c3ekc")]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("unlocksound:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ypf3l"]
+_data = {
+"RESET": SubResource("Animation_lsvgj"),
+"locked": SubResource("Animation_v3nan"),
+"unlocked": SubResource("Animation_yqo2h")
+}
+
+[node name="powerDoor" instance=ExtResource("1_c8hh0")]
+
+[node name="primeFlap" parent="." index="1"]
+material_override = SubResource("StandardMaterial3D_aw8nn")
+
+[node name="Circle_002" parent="." index="2"]
+material_override = SubResource("StandardMaterial3D_aw8nn")
+
+[node name="Circle_003" parent="." index="3"]
+material_override = SubResource("StandardMaterial3D_aw8nn")
+
+[node name="Circle_004" parent="." index="4"]
+material_override = SubResource("StandardMaterial3D_aw8nn")
+
+[node name="Torus" parent="." index="5"]
+material_override = SubResource("StandardMaterial3D_uwpls")
+
+[node name="icon" type="Sprite3D" parent="." index="10"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.074, 0.2)
+material_override = ExtResource("2_c0la0")
+billboard = 1
+texture_filter = 0
+texture = ExtResource("2_vfdg8")
+
+[node name="icon2" type="Sprite3D" parent="." index="11"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0.074, -0.2)
+material_override = ExtResource("2_c0la0")
+billboard = 1
+texture_filter = 0
+texture = ExtResource("2_vfdg8")
+
+[node name="iconAnimationPlayer" type="AnimationPlayer" parent="." index="12"]
+libraries = {
+"": SubResource("AnimationLibrary_ypf3l")
+}
+
+[node name="unlocksound" type="AudioStreamPlayer3D" parent="." index="13"]
+stream = ExtResource("5_djgl0")
+
+[node name="locksound" type="AudioStreamPlayer3D" parent="." index="14"]
+stream = ExtResource("6_ovha4")
+
+[connection signal="doorOpened" from="." to="iconAnimationPlayer" method="play" binds= ["unlocked"]]
+[connection signal="doorShut" from="." to="iconAnimationPlayer" method="play" binds= ["locked"]]

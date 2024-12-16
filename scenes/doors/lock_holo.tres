@@ -1,0 +1,14 @@
+[gd_resource type="ShaderMaterial" load_steps=4 format=3 uid="uid://b3lg727ugh7er"]
+
+[ext_resource type="Shader" uid="uid://bfj3eqbtr1fug" path="res://shaders/hologram.tres" id="1_bvnxb"]
+[ext_resource type="Texture2D" uid="uid://54ikoogs1sn3" path="res://assets/models/Textures/locked.png" id="2_e6yse"]
+[ext_resource type="Texture2D" uid="uid://bdxc3raakffk0" path="res://assets/models/Textures/hologramoverlay.png" id="3_cy443"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_bvnxb")
+shader_parameter/tint = Color(1, 0, 0, 1)
+shader_parameter/scrollspeed = 0.1
+shader_parameter/flicker_speed = 500
+shader_parameter/image = ExtResource("2_e6yse")
+shader_parameter/overlay = ExtResource("3_cy443")
