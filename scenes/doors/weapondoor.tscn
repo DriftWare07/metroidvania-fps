@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=3 uid="uid://boy3rw6802kkm"]
+
+[ext_resource type="PackedScene" uid="uid://0nho5xcvrg3" path="res://scenes/doors/switchDoor.tscn" id="1_s2f57"]
+[ext_resource type="Material" uid="uid://cahg81e12ljlu" path="res://scenes/doors/flapmaterial.tres" id="2_4c3jq"]
+[ext_resource type="Texture2D" uid="uid://cs1fxacb1h3pp" path="res://assets/area textures/raw textures/metal_norm.png" id="3_3p7dw"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4fxhi"]
+albedo_color = Color(0.363281, 0.363281, 0.363281, 1)
+metallic = 1.0
+roughness = 0.5
+normal_enabled = true
+normal_scale = 0.3
+normal_texture = ExtResource("3_3p7dw")
+uv1_triplanar = true
+
+[node name="weaponDoor" instance=ExtResource("1_s2f57")]
+timeout = 5
+close_on_timeout = true
+
+[node name="primeFlap" parent="." index="1"]
+material_override = ExtResource("2_4c3jq")
+
+[node name="Circle_002" parent="." index="2"]
+material_override = ExtResource("2_4c3jq")
+
+[node name="Circle_003" parent="." index="3"]
+material_override = ExtResource("2_4c3jq")
+
+[node name="Circle_004" parent="." index="4"]
+material_override = ExtResource("2_4c3jq")
+
+[node name="Torus" parent="." index="5"]
+material_override = SubResource("StandardMaterial3D_4fxhi")
+
+[connection signal="damaged" from="Area3D" to="." method="open"]

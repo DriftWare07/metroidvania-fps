@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://dnrf751lqc268"]
+[gd_scene load_steps=18 format=3 uid="uid://dnrf751lqc268"]
 
 [ext_resource type="PackedScene" uid="uid://0nho5xcvrg3" path="res://scenes/doors/switchDoor.tscn" id="1_c8hh0"]
 [ext_resource type="Material" uid="uid://cahg81e12ljlu" path="res://scenes/doors/flapmaterial.tres" id="2_8qhwj"]
@@ -17,6 +17,132 @@ normal_enabled = true
 normal_scale = 0.3
 normal_texture = ExtResource("2_swg74")
 uv1_triplanar = true
+
+[sub_resource type="Animation" id="Animation_wm0g1"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("primeFlap:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Circle_002:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Circle_003:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Circle_004:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("doorvines/BézierCurve:material_override:shader_parameter/progress")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_frdp7"]
+resource_local_to_scene = true
+resource_name = "doorOpen"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("primeFlap:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, -0.785398)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Circle_002:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, -0.785398)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Circle_003:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, -0.785398)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Circle_004:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, -0.785398)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rshfm"]
+_data = {
+"RESET": SubResource("Animation_wm0g1"),
+"doorOpen": SubResource("Animation_frdp7")
+}
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_hli73"]
+height = 0.575777
+radius = 1.12182
 
 [sub_resource type="Animation" id="Animation_lsvgj"]
 length = 0.001
@@ -172,6 +298,17 @@ material_override = ExtResource("2_8qhwj")
 
 [node name="Torus" parent="." index="5"]
 material_override = SubResource("StandardMaterial3D_uwpls")
+
+[node name="AnimationPlayer" parent="." index="6"]
+libraries = {
+"": SubResource("AnimationLibrary_rshfm")
+}
+
+[node name="CollisionShape3D" parent="StaticBody3D" index="0"]
+shape = SubResource("CylinderShape3D_hli73")
+
+[node name="CollisionShape3D" parent="Area3D" index="0"]
+shape = SubResource("CylinderShape3D_hli73")
 
 [node name="icon" type="Sprite3D" parent="." index="10"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.074, 0.2)
