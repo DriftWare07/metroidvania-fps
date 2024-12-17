@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="CollectionsData" load_steps=2 format=3 uid="uid://dlx5j5qau21kp"]
+
+[ext_resource type="Script" path="res://addons/asset_dock/collection_data.gd" id="1_lvrek"]
+
+[resource]
+script = ExtResource("1_lvrek")
+collection_name = "doors"
+collection_items = Array[int]([8107173786948230427, 3984988328084409566, 9203431054072339362, 285222647697758391])

@@ -1,0 +1,12 @@
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://cahg81e12ljlu"]
+
+[ext_resource type="Texture2D" uid="uid://n2kyvg3kwyk6" path="res://assets/models/Textures/s2 Metal 01 Grey 01 Lines Diagonal.png" id="1_q5mno"]
+[ext_resource type="Texture2D" uid="uid://iks1b1tmxbu0" path="res://assets/models/Textures/metalgraylinesdiagonal_normal.png" id="2_36hwy"]
+
+[resource]
+albedo_color = Color(0.356644, 0.521925, 0.621094, 1)
+albedo_texture = ExtResource("1_q5mno")
+normal_enabled = true
+normal_scale = 0.3
+normal_texture = ExtResource("2_36hwy")
+uv1_triplanar = true

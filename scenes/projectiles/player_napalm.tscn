@@ -56,10 +56,11 @@ speed = 10
 gravity_decay = -0.01
 timeout = 1
 
-[node name="Damage_Component" type="Area3D" parent="."]
+[node name="Damage_Component" type="Area3D" parent="." groups=["fire"]]
 script = ExtResource("2_x13jp")
 damage = 3
 exclusion_group = "player"
+damage_group = "fire"
 delete_host_on_dealing_damage = false
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Damage_Component"]

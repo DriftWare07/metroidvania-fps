@@ -1,23 +1,13 @@
-[gd_scene load_steps=16 format=3 uid="uid://dnrf751lqc268"]
+[gd_scene load_steps=14 format=3 uid="uid://dnrf751lqc268"]
 
 [ext_resource type="PackedScene" uid="uid://0nho5xcvrg3" path="res://scenes/doors/switchDoor.tscn" id="1_c8hh0"]
-[ext_resource type="Texture2D" uid="uid://n2kyvg3kwyk6" path="res://assets/models/Textures/s2 Metal 01 Grey 01 Lines Diagonal.png" id="2_5jhif"]
+[ext_resource type="Material" uid="uid://cahg81e12ljlu" path="res://scenes/doors/flapmaterial.tres" id="2_8qhwj"]
 [ext_resource type="Material" uid="uid://b3lg727ugh7er" path="res://scenes/doors/lock_holo.tres" id="2_c0la0"]
 [ext_resource type="Texture2D" uid="uid://cs1fxacb1h3pp" path="res://assets/area textures/raw textures/metal_norm.png" id="2_swg74"]
 [ext_resource type="Texture2D" uid="uid://54ikoogs1sn3" path="res://assets/models/Textures/locked.png" id="2_vfdg8"]
-[ext_resource type="Texture2D" uid="uid://iks1b1tmxbu0" path="res://assets/models/Textures/metalgraylinesdiagonal_normal.png" id="3_rwe8y"]
 [ext_resource type="Material" uid="uid://d1dh2aas18yik" path="res://scenes/doors/unlock_holo.tres" id="4_c3ekc"]
 [ext_resource type="AudioStream" uid="uid://kpni5lniufe7" path="res://assets/sounds/CYBERDECK_General_UI_18.wav" id="5_djgl0"]
 [ext_resource type="AudioStream" uid="uid://oo6x37ds4dgo" path="res://assets/sounds/CYBERDECK_Outro_2.wav" id="6_ovha4"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_aw8nn"]
-albedo_color = Color(0.356644, 0.521925, 0.621094, 1)
-albedo_texture = ExtResource("2_5jhif")
-normal_enabled = true
-normal_scale = 0.3
-normal_texture = ExtResource("3_rwe8y")
-uv1_triplanar = true
-uv1_world_triplanar = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uwpls"]
 albedo_color = Color(0.363281, 0.363281, 0.363281, 1)
@@ -169,16 +159,16 @@ _data = {
 [node name="powerDoor" instance=ExtResource("1_c8hh0")]
 
 [node name="primeFlap" parent="." index="1"]
-material_override = SubResource("StandardMaterial3D_aw8nn")
+material_override = ExtResource("2_8qhwj")
 
 [node name="Circle_002" parent="." index="2"]
-material_override = SubResource("StandardMaterial3D_aw8nn")
+material_override = ExtResource("2_8qhwj")
 
 [node name="Circle_003" parent="." index="3"]
-material_override = SubResource("StandardMaterial3D_aw8nn")
+material_override = ExtResource("2_8qhwj")
 
 [node name="Circle_004" parent="." index="4"]
-material_override = SubResource("StandardMaterial3D_aw8nn")
+material_override = ExtResource("2_8qhwj")
 
 [node name="Torus" parent="." index="5"]
 material_override = SubResource("StandardMaterial3D_uwpls")

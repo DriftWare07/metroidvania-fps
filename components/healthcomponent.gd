@@ -24,8 +24,13 @@ func _process(delta: float) -> void:
 	invframes -= delta
 
 
-func damage(dmg):
+func damage(dmg, group=""):
 	if invframes > 0: return
+	
+	if damage_group != "":
+		if group != damage_group:
+			return
+	
 	invframes = iframes
 	health -= dmg
 	damaged.emit()

@@ -24,7 +24,7 @@ func die_on_body():
 	queue_free()
 
 func spawn_sparks():
-	print("sparks")
+	
 	var particles = load("res://scenes/projectiles/hitSparks.tscn")
 	var p = particles.instantiate()
 	get_tree().root.add_child(p)
