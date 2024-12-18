@@ -5,4 +5,4 @@
 [resource]
 script = ExtResource("1_aq1hl")
 collection_name = "switches"
-collection_items = Array[int]([1906046114337338801])
+collection_items = Array[int]([1906046114337338801, 8884399758771957664])

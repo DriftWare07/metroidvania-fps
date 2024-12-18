@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=4 uid="uid://ecfttdaisre2"]
+[gd_scene load_steps=29 format=4 uid="uid://ecfttdaisre2"]
 
 [ext_resource type="Script" path="res://scenes/doors/doorhandler.gd" id="1_0h4hl"]
 [ext_resource type="PackedScene" uid="uid://bo6v61ydhgmti" path="res://assets/models/spiralDoor/doorvines.glb" id="2_hscci"]
@@ -11,6 +11,7 @@
 [ext_resource type="AnimationLibrary" uid="uid://gkw4oun8j127" path="res://scenes/doors/doorAnimLibrary.tres" id="6_5nl6t"]
 [ext_resource type="Script" path="res://components/hitboxcomponent.gd" id="9_3nsfw"]
 [ext_resource type="Script" path="res://components/healthcomponent.gd" id="10_jv0hb"]
+[ext_resource type="AudioStream" uid="uid://56dfcobprvru" path="res://assets/sounds/Bluezone_BC0279_forest_tree_branch_leaf_foliage_impact_short_012.wav" id="12_4rltf"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b3osq"]
 
@@ -237,7 +238,7 @@ radius = 1.12182
 [node name="vinedoor" type="Node3D" node_paths=PackedStringArray("animation", "collider")]
 script = ExtResource("1_0h4hl")
 animation = NodePath("AnimationPlayer")
-open_anim = "doorOpen"
+open_anim = "vineDoorOpen"
 collider = NodePath("StaticBody3D/CollisionShape3D")
 
 [node name="Circle" type="MeshInstance3D" parent="."]
@@ -289,11 +290,6 @@ collision_mask = 3
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
 shape = SubResource("CylinderShape3D_hli73")
 
-[node name="hiss" type="AudioStreamPlayer3D" parent="."]
-stream = ExtResource("3_qt7jo")
-volume_db = 10.0
-max_polyphony = 10
-
 [node name="doorvines" parent="." instance=ExtResource("2_hscci")]
 transform = Transform3D(-6.11959e-08, 0, 1.4, 0, 1.4, 0, -1.4, 0, -6.11959e-08, 0, 0, 0.019979)
 
@@ -316,6 +312,14 @@ max_health = 25
 health = 25
 iframes = 0.1
 damage_group = "fire"
+
+[node name="hiss" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("3_qt7jo")
+volume_db = 10.0
+max_polyphony = 10
+
+[node name="vinesound" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("12_4rltf")
 
 [connection signal="doorStateChanged" from="." to="hiss" method="play"]
 [connection signal="dead" from="Health_Component" to="." method="open"]

@@ -1,0 +1,89 @@
+[gd_scene load_steps=14 format=3 uid="uid://dytw1bq4jmes3"]
+
+[ext_resource type="Shader" uid="uid://bfj3eqbtr1fug" path="res://shaders/hologram.tres" id="1_2fn6j"]
+[ext_resource type="Shader" path="res://shaders/multiswitch.gdshader" id="1_gtgmy"]
+[ext_resource type="Script" path="res://scenes/switches/multiswitch.gd" id="1_l7r32"]
+[ext_resource type="Texture2D" uid="uid://bdxc3raakffk0" path="res://assets/models/Textures/hologramoverlay.png" id="2_52hty"]
+[ext_resource type="Texture2D" uid="uid://6cqnaoe3i3o1" path="res://icon.png" id="2_rox0f"]
+[ext_resource type="PackedScene" uid="uid://u53nr3qn8m5j" path="res://assets/models/switches/damageSwitch.glb" id="2_xces4"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_ahq2y"]
+height = 0.3
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_jx5uf"]
+viewport_path = NodePath("Sprite3D/SubViewport")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ipf5w"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("1_2fn6j")
+shader_parameter/tint = Color(1, 1, 1, 1)
+shader_parameter/scrollspeed = 0.1
+shader_parameter/flicker_speed = 500
+shader_parameter/image = SubResource("ViewportTexture_jx5uf")
+shader_parameter/overlay = ExtResource("2_52hty")
+
+[sub_resource type="Gradient" id="Gradient_5buso"]
+colors = PackedColorArray(0, 1, 0.0390625, 0.314, 0, 1, 0.0390625, 0.314)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_kma4j"]
+gradient = SubResource("Gradient_5buso")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_aafs5"]
+resource_local_to_scene = true
+shader = ExtResource("1_gtgmy")
+shader_parameter/value = 1.0
+shader_parameter/segments = 2
+shader_parameter/radius = 0.5
+shader_parameter/hollow_radius = 0.2
+shader_parameter/margin = 0.0
+shader_parameter/rotation = 4.75e-08
+shader_parameter/progress_rotation = 4.75e-08
+shader_parameter/use_value_gradient = false
+shader_parameter/gradient = SubResource("GradientTexture1D_kma4j")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_em1et"]
+albedo_color = Color(0.179688, 0.179688, 0.179688, 1)
+
+[node name="Multiswitch" type="StaticBody3D"]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0, 0, 0)
+script = ExtResource("1_l7r32")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+shape = SubResource("CylinderShape3D_ahq2y")
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0.279424, 0)
+material_override = SubResource("ShaderMaterial_ipf5w")
+axis = 1
+texture = ExtResource("2_rox0f")
+
+[node name="SubViewport" type="SubViewport" parent="Sprite3D"]
+transparent_bg = true
+canvas_item_default_texture_filter = 0
+size = Vector2i(64, 64)
+
+[node name="Control" type="Control" parent="Sprite3D/SubViewport"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="Sprite3D/SubViewport/Control"]
+material = SubResource("ShaderMaterial_aafs5")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="damageSwitch" parent="." instance=ExtResource("2_xces4")]
+
+[node name="Cylinder" parent="damageSwitch" index="0"]
+material_override = SubResource("StandardMaterial3D_em1et")
+
+[editable path="damageSwitch"]

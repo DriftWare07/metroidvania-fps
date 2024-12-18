@@ -2,17 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://6cqnaoe3i3o1"
-path.s3tc="res://.godot/imported/icon.png-487276ed1e3a0c39cad0279d744ee560.s3tc.ctex"
+uid="uid://582uw76uommg"
+path.s3tc="res://.godot/imported/damageSwitch_damageswitchmaterial.png-705fd3d9995f40e8ec61a3f27527fdbc.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
+generator_parameters={
+"md5": "0c9e36164619e530c00ed98bddfe9047"
+}
 
 [deps]
 
-source_file="res://icon.png"
-dest_files=["res://.godot/imported/icon.png-487276ed1e3a0c39cad0279d744ee560.s3tc.ctex"]
+source_file="res://assets/models/switches/damageSwitch_damageswitchmaterial.png"
+dest_files=["res://.godot/imported/damageSwitch_damageswitchmaterial.png-705fd3d9995f40e8ec61a3f27527fdbc.s3tc.ctex"]
 
 [params]
 
