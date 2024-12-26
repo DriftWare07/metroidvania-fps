@@ -73,7 +73,7 @@ func _process(delta: float) -> void:
 			sound.play()
 		
 	
-	if Input.is_action_just_pressed("grenade") and not isGrabbing:
+	if Input.is_action_just_pressed("grenade") and not isGrabbing and Global.grenadeCount > 0:
 		
 		var g = grenade.instantiate()
 		get_tree().root.add_child(g)
@@ -83,7 +83,7 @@ func _process(delta: float) -> void:
 		g.rotation = global_rotation
 		g.chuck()
 		$grenade_point/grenadethrow.play()
-		
+		Global.grenadeCount -= 1
 	
 	if Input.is_action_just_released("weapon_up"): switchWeapon(1)
 	if Input.is_action_just_released("weapon_down"): switchWeapon(-1)

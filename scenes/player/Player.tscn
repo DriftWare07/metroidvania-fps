@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://bhctlvvjdodc0"]
+[gd_scene load_steps=44 format=3 uid="uid://bhctlvvjdodc0"]
 
 [ext_resource type="Script" path="res://addons/Basic FPS Player/Src/basic_player_startup.gd" id="1_2sght"]
 [ext_resource type="PackedScene" uid="uid://kmyakts4l64t" path="res://addons/Basic FPS Player/Src/basic_player_head.tscn" id="2_ile1v"]
@@ -18,10 +18,13 @@
 [ext_resource type="Resource" uid="uid://b7g8n6n21fhfx" path="res://weapons/deathray_shot.tres" id="10_156a8"]
 [ext_resource type="AudioStream" uid="uid://dcsl8ynvmdr77" path="res://assets/sounds/metal_impact_3.wav" id="10_gglt7"]
 [ext_resource type="AudioStream" uid="uid://cvjce0vfmrm7h" path="res://assets/sounds/Bluezone_BC0277_cartridge_case_handling_018.wav" id="13_k4117"]
+[ext_resource type="Script" path="res://scenes/player/hud.gd" id="14_j1b2o"]
+[ext_resource type="Shader" path="res://shaders/curve.gdshader" id="14_y00s2"]
 [ext_resource type="Texture2D" uid="uid://6cqnaoe3i3o1" path="res://icon.png" id="16_nxr56"]
 [ext_resource type="Script" path="res://components/hitboxcomponent.gd" id="17_e7tud"]
 [ext_resource type="Script" path="res://scenes/player/statspanel.gd" id="20_k2syj"]
 [ext_resource type="AudioStream" uid="uid://dblk32v0h4i27" path="res://assets/sounds/footsteps/snow_footsteps.tres" id="21_ggmn5"]
+[ext_resource type="Theme" uid="uid://cmnroq0auad8d" path="res://components/ui_theme.tres" id="21_httvs"]
 
 [sub_resource type="Gradient" id="Gradient_7uqg1"]
 offsets = PackedFloat32Array(0, 0.472296, 1)
@@ -184,6 +187,20 @@ _data = {
 "standard_recoil": SubResource("Animation_1157i")
 }
 
+[sub_resource type="ViewportTexture" id="ViewportTexture_8fxdd"]
+viewport_path = NodePath("CanvasLayer/SubViewport")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7a82d"]
+resource_local_to_scene = true
+render_priority = 0
+shader = ExtResource("14_y00s2")
+shader_parameter/texture_albedo = SubResource("ViewportTexture_8fxdd")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_aeph3"]
+size = Vector2(3, 2)
+subdivide_width = 10
+subdivide_depth = 10
+
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_li7ud"]
 
 [sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_awm78"]
@@ -226,8 +243,8 @@ animationPlayer = NodePath("../AnimationPlayer")
 aimcast = NodePath("../aimcast")
 cam = NodePath("../Camera3D")
 sound = NodePath("plasmasound")
-ui_label = NodePath("../../CanvasLayer/Control/weaponpanel/weapon")
-ui_icon = NodePath("../../CanvasLayer/Control/weaponpanel/weapon_icon")
+ui_label = NodePath("../../CanvasLayer/SubViewport/Control/weaponpanel/weapon")
+ui_icon = NodePath("../../CanvasLayer/SubViewport/Control/weaponpanel/weapon_icon")
 grabcast = NodePath("../grabcast")
 sway_left = Vector3(0, -0.1, 0)
 sway_right = Vector3(0, 0.1, 0)
@@ -291,6 +308,19 @@ libraries = {
 "": SubResource("AnimationLibrary_u4srt")
 }
 
+[node name="hud" type="Node3D" parent="Head"]
+script = ExtResource("14_j1b2o")
+sway_left = Vector3(0, -0.1, 0)
+sway_right = Vector3(0, 0.1, 0)
+sway_up = Vector3(-0.1, 0, 0)
+sway_down = Vector3(0.1, 0, 0)
+
+[node name="hudgeo" type="MeshInstance3D" parent="Head/hud"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, -0.45)
+material_override = SubResource("ShaderMaterial_7a82d")
+mesh = SubResource("PlaneMesh_aeph3")
+skeleton = NodePath("../..")
+
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_li7ud")
 
@@ -313,15 +343,25 @@ shape = SubResource("CapsuleShape3D_tbqci")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="Control" type="Control" parent="CanvasLayer"]
+[node name="SubViewport" type="SubViewport" parent="CanvasLayer"]
+transparent_bg = true
+size = Vector2i(1920, 1080)
+
+[node name="Control" type="Control" parent="CanvasLayer/SubViewport" node_paths=PackedStringArray("healthcomp", "hpbar", "hplabel", "grenade_label")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("21_httvs")
+script = ExtResource("20_k2syj")
+healthcomp = NodePath("../../../Health_Component")
+hpbar = NodePath("healthbar")
+hplabel = NodePath("healthbar/hplabel")
+grenade_label = NodePath("weaponpanel/grenades")
 
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Control"]
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/SubViewport/Control"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -331,31 +371,48 @@ grow_vertical = 2
 texture = ExtResource("8_typjj")
 stretch_mode = 3
 
-[node name="weaponpanel" type="Panel" parent="CanvasLayer/Control"]
+[node name="weaponpanel" type="Panel" parent="CanvasLayer/SubViewport/Control"]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_top = -154.0
-offset_right = 401.0
+offset_left = 1524.0
+offset_top = -248.0
+offset_right = 1925.0
+offset_bottom = -94.0
 grow_vertical = 0
 
-[node name="weapon" type="Label" parent="CanvasLayer/Control/weaponpanel"]
+[node name="weapon" type="Label" parent="CanvasLayer/SubViewport/Control/weaponpanel"]
 layout_mode = 1
 anchors_preset = 14
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = 5.0
+offset_left = 12.0
 offset_top = -22.0
-offset_right = -156.0
+offset_right = -155.0
 offset_bottom = 23.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 32
-text = "Weapon Name"
+text = "Weapon"
 
-[node name="weapon_icon" type="TextureRect" parent="CanvasLayer/Control/weaponpanel"]
+[node name="grenades" type="Label" parent="CanvasLayer/SubViewport/Control/weaponpanel"]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 12.0
+offset_top = 16.0
+offset_right = -155.0
+offset_bottom = 61.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 32
+text = "Grenades: 10"
+
+[node name="weapon_icon" type="TextureRect" parent="CanvasLayer/SubViewport/Control/weaponpanel"]
 layout_mode = 1
 anchors_preset = 11
 anchor_left = 1.0
@@ -366,25 +423,26 @@ grow_horizontal = 0
 grow_vertical = 2
 texture = ExtResource("16_nxr56")
 
-[node name="statspanel" type="Panel" parent="CanvasLayer/Control" node_paths=PackedStringArray("healthcomp")]
+[node name="healthbar" type="ProgressBar" parent="CanvasLayer/SubViewport/Control"]
+custom_minimum_size = Vector2(1000, 0)
 layout_mode = 1
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -384.0
-offset_top = -158.0
-grow_horizontal = 0
-grow_vertical = 0
-script = ExtResource("20_k2syj")
-healthcomp = NodePath("../../../Health_Component")
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -500.0
+offset_top = 114.0
+offset_right = 500.0
+offset_bottom = 154.0
+grow_horizontal = 2
+value = 50.0
+show_percentage = false
 
-[node name="Label" type="Label" parent="CanvasLayer/Control/statspanel"]
+[node name="hplabel" type="Label" parent="CanvasLayer/SubViewport/Control/healthbar"]
 layout_mode = 0
-offset_left = 11.0
-offset_right = 370.0
-offset_bottom = 62.0
+offset_left = 26.0
+offset_top = -37.0
+offset_right = 385.0
+offset_bottom = 25.0
 theme_override_font_sizes/font_size = 32
 text = "Health
 "

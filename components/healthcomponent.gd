@@ -2,14 +2,15 @@ extends Node
 class_name Health_Component
 
 signal damaged
+signal health_changed
 signal dead
 
 @export var host : Node
 @export var delete_host_on_death = true
 
 
-@export var max_health = 100
-@export var health = 100
+@export var max_health = 100.0
+@export var health = 100.0
 @export var iframes = 0.4
 
 
@@ -32,6 +33,7 @@ func damage(dmg):
 	invframes = iframes
 	health -= dmg
 	damaged.emit()
+	health_changed.emit()
 	print(health)
 	if  health < 1:
 		if reload_scene_on_death: get_tree().reload_current_scene()
