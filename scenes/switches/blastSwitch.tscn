@@ -1,0 +1,92 @@
+[gd_scene load_steps=12 format=3 uid="uid://dgsll2pnhdqhx"]
+
+[ext_resource type="Script" path="res://scenes/switches/switchhandler.gd" id="1_fv2vu"]
+[ext_resource type="Script" path="res://components/hitboxcomponent.gd" id="2_ug55a"]
+[ext_resource type="PackedScene" uid="uid://cpav4yjuu4lde" path="res://assets/models/switches/blastswitch/blastswitch.glb" id="3_7xfdp"]
+[ext_resource type="Material" uid="uid://lkrrlrpg6p2p" path="res://assets/models/switches/blastswitch/blastswitch_on.tres" id="4_q1gur"]
+[ext_resource type="Script" path="res://scenes/switches/grenademagnetarea.gd" id="4_rmbos"]
+[ext_resource type="Material" uid="uid://decaktgxhtjlc" path="res://assets/models/switches/blastswitch/blastswitch_off.tres" id="5_eu4jv"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_56y3i"]
+height = 0.3
+
+[sub_resource type="Animation" id="Animation_t12pt"]
+resource_name = "on"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Cylinder:material_override")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [ExtResource("4_q1gur"), ExtResource("5_eu4jv")]
+}
+
+[sub_resource type="Animation" id="Animation_i8t2j"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Cylinder:material_override")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("4_q1gur")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_vfgkh"]
+_data = {
+"RESET": SubResource("Animation_i8t2j"),
+"on": SubResource("Animation_t12pt")
+}
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_eav1j"]
+radius = 1.0
+
+[node name="blastSwitch" type="StaticBody3D"]
+script = ExtResource("1_fv2vu")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+shape = SubResource("CylinderShape3D_56y3i")
+
+[node name="hitbox" type="Area3D" parent="."]
+script = ExtResource("2_ug55a")
+damage_group = "grenade"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="hitbox"]
+transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 0, 0, 0)
+shape = SubResource("CylinderShape3D_56y3i")
+
+[node name="blastswitch" parent="." instance=ExtResource("3_7xfdp")]
+
+[node name="Cylinder" parent="blastswitch" index="0"]
+material_override = ExtResource("4_q1gur")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="blastswitch"]
+libraries = {
+"": SubResource("AnimationLibrary_vfgkh")
+}
+
+[node name="grenademagnetarea" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.245621, 0)
+collision_layer = 3
+collision_mask = 3
+script = ExtResource("4_rmbos")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="grenademagnetarea"]
+shape = SubResource("SphereShape3D_eav1j")
+
+[connection signal="switched_off" from="." to="blastswitch/AnimationPlayer" method="play_backwards" binds= ["on"]]
+[connection signal="switched_on" from="." to="blastswitch/AnimationPlayer" method="play" binds= ["on"]]
+[connection signal="damaged" from="hitbox" to="." method="toggle"]
+[connection signal="body_entered" from="grenademagnetarea" to="grenademagnetarea" method="_on_body_entered"]
+
+[editable path="blastswitch"]

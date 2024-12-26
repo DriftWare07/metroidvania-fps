@@ -1,4 +1,5 @@
 extends RigidBody3D
+class_name grenade
 
 @export var velocity = 10
 @export var damage = 50
@@ -20,7 +21,7 @@ func explode():
 	
 	for i in areas:
 		if i is hitbox:
-			i.damage(damage)
+			i.damage(damage,"grenade")
 		
 	
 	for i in bodies:

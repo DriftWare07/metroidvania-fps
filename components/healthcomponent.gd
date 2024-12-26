@@ -12,7 +12,7 @@ signal dead
 @export var health = 100
 @export var iframes = 0.4
 
-@export var damage_group = ""
+
 
 @export var reload_scene_on_death = false
 @export var go_to_scene_on_death : PackedScene
@@ -24,12 +24,10 @@ func _process(delta: float) -> void:
 	invframes -= delta
 
 
-func damage(dmg, group=""):
+func damage(dmg):
 	if invframes > 0: return
 	
-	if damage_group != "":
-		if group != damage_group:
-			return
+	
 	
 	invframes = iframes
 	health -= dmg

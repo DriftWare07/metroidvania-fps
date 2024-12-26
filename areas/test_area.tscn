@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://dcufivs23yb02"]
+[gd_scene load_steps=29 format=3 uid="uid://dcufivs23yb02"]
 
 [ext_resource type="PackedScene" uid="uid://cuo8yd1giiv71" path="res://scenes/levelParent.tscn" id="1_ydlpu"]
 [ext_resource type="Material" uid="uid://ug77jpkonf7g" path="res://assets/area textures/dark_metal.tres" id="2_yl5wb"]
@@ -16,6 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://boy3rw6802kkm" path="res://scenes/doors/weapondoor.tscn" id="12_kr62x"]
 [ext_resource type="PackedScene" uid="uid://dytw1bq4jmes3" path="res://scenes/switches/multiswitch.tscn" id="13_3u1dj"]
 [ext_resource type="PackedScene" uid="uid://d4ehfusggv043" path="res://scenes/doors/laser_grid.tscn" id="13_ib7oi"]
+[ext_resource type="PackedScene" uid="uid://dgsll2pnhdqhx" path="res://scenes/switches/blastSwitch.tscn" id="17_xu2ei"]
 
 [sub_resource type="Curve" id="Curve_nb2ee"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.503685, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -196,7 +197,7 @@ transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 2.9549
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 2.81539, 1.65968, -12.3221)
 
 [node name="powerDoor" parent="SubViewport/worldParent/protoCSGParent" index="8" instance=ExtResource("11_mrimb")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 2.76112, 1.72321, -15.6311)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 2.71598, 1.72321, -15.6339)
 
 [node name="Multiswitch" parent="SubViewport/worldParent/protoCSGParent" index="9" node_paths=PackedStringArray("switches") instance=ExtResource("13_3u1dj")]
 transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 2.13477, 1.64154, -18.2183)
@@ -225,14 +226,14 @@ mesh = SubResource("PlaneMesh_nxve4")
 [node name="DamageSwitch" parent="SubViewport/worldParent" index="6" instance=ExtResource("11_khpfj")]
 transform = Transform3D(-0.0145031, 0.999895, 0, -0.999895, -0.0145031, 0, 0, 0, 1, -2.1752, 1.36107, -0.182241)
 
-[node name="DamageSwitch3" parent="SubViewport/worldParent" index="7" instance=ExtResource("11_khpfj")]
-transform = Transform3D(-0.0145031, 0.999895, 0, -0.999895, -0.0145031, 0, 0, 0, 1, -2.38345, 1.60098, -5.77398)
-
-[node name="DamageSwitch2" parent="SubViewport/worldParent" index="8" instance=ExtResource("11_khpfj")]
+[node name="DamageSwitch2" parent="SubViewport/worldParent" index="7" instance=ExtResource("11_khpfj")]
 transform = Transform3D(1.91069e-15, 4.37114e-08, 1, 1, -4.37114e-08, 0, 4.37114e-08, 1, -4.37114e-08, 2.09084, 1.37063, 1.52516)
+
+[node name="blastSwitch" parent="SubViewport/worldParent" index="8" instance=ExtResource("17_xu2ei")]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, -2.42465, 1.43729, -5.69613)
 
 [connection signal="switched_off" from="SubViewport/worldParent/protoCSGParent/Multiswitch" to="SubViewport/worldParent/protoCSGParent/powerDoor" method="close"]
 [connection signal="switched_on" from="SubViewport/worldParent/protoCSGParent/Multiswitch" to="SubViewport/worldParent/protoCSGParent/powerDoor" method="open"]
 [connection signal="switched" from="SubViewport/worldParent/DamageSwitch" to="SubViewport/worldParent/protoCSGParent/spiraldoor" method="toggle"]
-[connection signal="switched" from="SubViewport/worldParent/DamageSwitch3" to="SubViewport/worldParent/protoCSGParent/laser_grid" method="toggle"]
 [connection signal="switched" from="SubViewport/worldParent/DamageSwitch2" to="SubViewport/worldParent/protoCSGParent/spiraldoor" method="toggle"]
+[connection signal="switched" from="SubViewport/worldParent/blastSwitch" to="SubViewport/worldParent/protoCSGParent/laser_grid" method="toggle"]

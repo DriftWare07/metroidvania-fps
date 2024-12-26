@@ -1,0 +1,10 @@
+[gd_resource type="StandardMaterial3D" load_steps=3 format=3 uid="uid://decaktgxhtjlc"]
+
+[ext_resource type="Texture2D" uid="uid://drkgta563qmmd" path="res://assets/models/switches/blastswitch/blastswitch_damageswitchmaterial_off.png" id="1_cumpy"]
+[ext_resource type="Texture2D" uid="uid://bhfqxx4e0hk3c" path="res://assets/models/switches/damageswitchemissionlred.png" id="2_uo5rm"]
+
+[resource]
+albedo_texture = ExtResource("1_cumpy")
+emission_enabled = true
+emission_energy_multiplier = 2.0
+emission_texture = ExtResource("2_uo5rm")

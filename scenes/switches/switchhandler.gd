@@ -11,10 +11,13 @@ signal switched
 @export var cooldown_max = 1
 var cooldown = 1
 
+
+
 func _process(delta: float) -> void:
 	cooldown -= delta
 
 func toggle():
+	
 	if cooldown > 0: return
 	if state:
 		state = false

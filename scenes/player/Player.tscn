@@ -297,7 +297,6 @@ shape = SubResource("CapsuleShape3D_li7ud")
 [node name="Health_Component" type="Node" parent="." node_paths=PackedStringArray("host")]
 script = ExtResource("3_pi5yv")
 host = NodePath("..")
-damage_group = "damage"
 reload_scene_on_death = true
 
 [node name="damagesound" type="AudioStreamPlayer" parent="Health_Component"]

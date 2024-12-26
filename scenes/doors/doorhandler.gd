@@ -17,6 +17,7 @@ var t = 0
 
 func _ready() -> void:
 	t = timeout
+	
 
 func _process(delta: float) -> void:
 	if not close_on_timeout: return

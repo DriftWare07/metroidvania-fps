@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://bxqchtcclgleg"]
+[gd_scene load_steps=6 format=3 uid="uid://bxqchtcclgleg"]
 
 [ext_resource type="Script" path="res://weapons/he_grenade.gd" id="1_iiegq"]
 [ext_resource type="PackedScene" uid="uid://cf4towtsjef2y" path="res://assets/models/grenade/grenade.glb" id="1_xyiny"]
+[ext_resource type="AudioStream" uid="uid://0jd24mtbyg81" path="res://assets/sounds/he_grenade_beep.wav" id="3_hitah"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_30s14"]
 radius = 0.0994846
@@ -33,5 +34,9 @@ autostart = true
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 light_color = Color(1, 0, 0, 1)
+
+[node name="beep" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("3_hitah")
+autoplay = true
 
 [connection signal="timeout" from="Timer" to="." method="explode"]
