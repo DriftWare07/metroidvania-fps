@@ -1,5 +1,5 @@
 extends Node3D
-
+class_name bullet
 
 
 @export var speed = 30

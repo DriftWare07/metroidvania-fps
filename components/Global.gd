@@ -1,17 +1,18 @@
 extends Node
-
-
 var deathRayCooldown = 0
 var deathrayCharged = false
 var chargeSound = AudioStreamPlayer.new()
 
 var grenadeCount = 10
+
+
 #spoonsandlessspoons made the death ray chargeup sound
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _ready() -> void:
 	call_deferred("add_child", chargeSound)
 
 func _process(delta: float) -> void:
+	
 	
 	
 	deathRayCooldown -= delta

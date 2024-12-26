@@ -34,7 +34,7 @@ func damage(dmg):
 	health -= dmg
 	damaged.emit()
 	health_changed.emit()
-	print(health)
+	
 	if  health < 1:
 		if reload_scene_on_death: get_tree().reload_current_scene()
 		if go_to_scene_on_death != null: get_tree().change_scene_to_packed(go_to_scene_on_death)

@@ -1,8 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://fmgl7iwmoswq"]
+[gd_scene load_steps=13 format=3 uid="uid://fmgl7iwmoswq"]
 
-[ext_resource type="Script" path="res://scenes/projectiles/bullet.gd" id="1_2psk0"]
+[ext_resource type="Script" path="res://scenes/projectiles/napalm.gd" id="1_fh3fc"]
 [ext_resource type="Script" path="res://components/damagecomponent.gd" id="2_x13jp"]
 [ext_resource type="Texture2D" uid="uid://c5lhrhmp58evc" path="res://assets/fire_01.png" id="3_gxgne"]
+[ext_resource type="AudioStream" uid="uid://ctwqbks8tplqw" path="res://assets/sounds/563138__nox_sound__foley_object_flame_thrower_loop_stereo.wav" id="4_5ucmx"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_k63ek"]
 radius = 0.720919
@@ -51,9 +52,8 @@ particles_anim_loop = false
 material = SubResource("StandardMaterial3D_l3rke")
 
 [node name="player_napalm" type="Node3D"]
-script = ExtResource("1_2psk0")
-speed = 10
-gravity_decay = -0.01
+script = ExtResource("1_fh3fc")
+speed = 15
 timeout = 1
 
 [node name="Damage_Component" type="Area3D" parent="." groups=["fire"]]
@@ -73,3 +73,8 @@ fixed_fps = 90
 local_coords = true
 process_material = SubResource("ParticleProcessMaterial_p0yrm")
 draw_pass_1 = SubResource("QuadMesh_ibb2e")
+
+[node name="firesound" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("4_5ucmx")
+autoplay = true
+bus = &"player_fx"

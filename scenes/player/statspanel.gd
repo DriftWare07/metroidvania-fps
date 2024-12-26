@@ -3,6 +3,7 @@ extends Control
 
 @export var healthcomp : Health_Component
 @export var hpbar : ProgressBar
+@export var hpbar2 : ProgressBar
 @export var hplabel : Label
 @export var grenade_label : Label
 
@@ -21,3 +22,4 @@ func _process(delta: float) -> void:
 func update_hpbar():
 	var tween = get_tree().create_tween()
 	tween.tween_property(hpbar,"value", healthcomp.health,1).set_trans(Tween.TRANS_QUART)
+	tween.tween_property(hpbar2,"value", healthcomp.health,3).set_trans(Tween.TRANS_QUART)

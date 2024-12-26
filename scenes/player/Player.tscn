@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://bhctlvvjdodc0"]
+[gd_scene load_steps=46 format=3 uid="uid://bhctlvvjdodc0"]
 
 [ext_resource type="Script" path="res://addons/Basic FPS Player/Src/basic_player_startup.gd" id="1_2sght"]
 [ext_resource type="PackedScene" uid="uid://kmyakts4l64t" path="res://addons/Basic FPS Player/Src/basic_player_head.tscn" id="2_ile1v"]
@@ -213,6 +213,37 @@ stream_2/stream = ExtResource("10_gglt7")
 radius = 0.6
 height = 2.1
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iwydv"]
+content_margin_left = 2.0
+content_margin_top = 2.0
+content_margin_right = 2.0
+content_margin_bottom = 2.0
+bg_color = Color(0.1, 0.1, 0.1, 0)
+skew = Vector2(1, 0)
+border_width_left = 25
+border_width_right = 25
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+corner_detail = 6
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_sbmby"]
+content_margin_left = 2.0
+content_margin_top = 2.0
+content_margin_right = 2.0
+content_margin_bottom = 2.0
+bg_color = Color(1, 0.375, 0, 0.5)
+skew = Vector2(1, 0)
+border_width_left = 25
+border_width_right = 25
+border_color = Color(0.8, 0.8, 0.8, 0)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+corner_detail = 6
+
 [node name="Basic FPS Player" type="CharacterBody3D" groups=["player", "player_damage"]]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 collision_layer = 2
@@ -347,7 +378,7 @@ shape = SubResource("CapsuleShape3D_tbqci")
 transparent_bg = true
 size = Vector2i(1920, 1080)
 
-[node name="Control" type="Control" parent="CanvasLayer/SubViewport" node_paths=PackedStringArray("healthcomp", "hpbar", "hplabel", "grenade_label")]
+[node name="Control" type="Control" parent="CanvasLayer/SubViewport" node_paths=PackedStringArray("healthcomp", "hpbar", "hpbar2", "hplabel", "grenade_label")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -358,6 +389,7 @@ theme = ExtResource("21_httvs")
 script = ExtResource("20_k2syj")
 healthcomp = NodePath("../../../Health_Component")
 hpbar = NodePath("healthbar")
+hpbar2 = NodePath("healthbar/secondary")
 hplabel = NodePath("healthbar/hplabel")
 grenade_label = NodePath("weaponpanel/grenades")
 
@@ -376,9 +408,9 @@ layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = 1524.0
+offset_left = 10.0
 offset_top = -248.0
-offset_right = 1925.0
+offset_right = 411.0
 offset_bottom = -94.0
 grow_vertical = 0
 
@@ -394,7 +426,7 @@ offset_right = -155.0
 offset_bottom = 23.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 24
 text = "Weapon"
 
 [node name="grenades" type="Label" parent="CanvasLayer/SubViewport/Control/weaponpanel"]
@@ -434,6 +466,7 @@ offset_top = 114.0
 offset_right = 500.0
 offset_bottom = 154.0
 grow_horizontal = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_iwydv")
 value = 50.0
 show_percentage = false
 
@@ -446,6 +479,19 @@ offset_bottom = 25.0
 theme_override_font_sizes/font_size = 32
 text = "Health
 "
+
+[node name="secondary" type="ProgressBar" parent="CanvasLayer/SubViewport/Control/healthbar"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("21_httvs")
+theme_override_styles/fill = SubResource("StyleBoxFlat_sbmby")
+value = 100.0
+show_percentage = false
 
 [node name="footsteps" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("21_ggmn5")

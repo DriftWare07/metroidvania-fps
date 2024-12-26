@@ -22,7 +22,7 @@ config/icon="res://gameicon.png"
 
 [autoload]
 
-Global="*res://components/Global.gd"
+Global="*res://components/Global.tscn"
 
 [display]
 
