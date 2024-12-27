@@ -1,0 +1,90 @@
+[gd_scene load_steps=14 format=3 uid="uid://b3g3g3ispjxfp"]
+
+[ext_resource type="PackedScene" uid="uid://dhrxoc474agwd" path="res://assets/models/enemies/security drone/securityDrone.glb" id="1_ovauf"]
+[ext_resource type="AudioStream" uid="uid://do8spk21q6pxo" path="res://assets/sounds/drone_fans_loop.wav" id="2_8whu7"]
+[ext_resource type="Script" path="res://components/healthcomponent.gd" id="3_crldv"]
+[ext_resource type="Script" path="res://components/hitboxcomponent.gd" id="4_aryml"]
+[ext_resource type="Script" path="res://addons/shaker/src/Vector3/shaker_component3D.gd" id="4_u2wgk"]
+[ext_resource type="Script" path="res://addons/shaker/data/Vector3/BaseShakerType3D.gd" id="5_enp7j"]
+[ext_resource type="Script" path="res://addons/shaker/data/Vector3/ShakerTypeSineWave3D.gd" id="6_s7uu7"]
+[ext_resource type="Script" path="res://addons/shaker/data/Vector3/ShakerPreset3D.gd" id="7_xylk0"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_mwsih"]
+radius = 0.615315
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_weutp"]
+radius = 0.677318
+
+[sub_resource type="Resource" id="Resource_kfyvx"]
+script = ExtResource("6_s7uu7")
+frequency = Vector3(1, 1, 1)
+phase = Vector3(1, 1, 1)
+amplitude = Vector3(1, 1, 1)
+offset = Vector3(0, 0, 0)
+BlendingMode = 0
+fade_in = 0.0
+fade_out = 0.0
+start_percent = 0.0
+end_percent = 1.0
+_temp_graph = false
+bake_internal = 64
+
+[sub_resource type="Resource" id="Resource_1jxcp"]
+script = ExtResource("6_s7uu7")
+frequency = Vector3(1, 1, 1)
+phase = Vector3(1, 1, 1)
+amplitude = Vector3(0, 1, 0)
+offset = Vector3(0, 0, 0)
+BlendingMode = 0
+fade_in = 0.0
+fade_out = 0.0
+start_percent = 0.0
+end_percent = 1.0
+_temp_graph = false
+bake_internal = 64
+
+[sub_resource type="Resource" id="Resource_gia32"]
+script = ExtResource("7_xylk0")
+PositionShake = Array[ExtResource("5_enp7j")]([SubResource("Resource_kfyvx")])
+RotationShake = Array[ExtResource("5_enp7j")]([SubResource("Resource_1jxcp")])
+ScaleShake = Array[ExtResource("5_enp7j")]([])
+bake_internal = 64
+__follow_timeline = false
+
+[node name="SecurityDrone" type="CharacterBody3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.254071, 0)
+shape = SubResource("SphereShape3D_mwsih")
+
+[node name="fans" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("2_8whu7")
+autoplay = true
+
+[node name="Health_Component" type="Node" parent="." node_paths=PackedStringArray("host")]
+script = ExtResource("3_crldv")
+host = NodePath("..")
+max_health = 30.0
+health = 30.0
+
+[node name="hitbox" type="Area3D" parent="." node_paths=PackedStringArray("healthcomp")]
+script = ExtResource("4_aryml")
+healthcomp = NodePath("../Health_Component")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="hitbox"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.288871, 0)
+shape = SubResource("SphereShape3D_weutp")
+
+[node name="ShakerComponent3D" type="Node3D" parent="." node_paths=PackedStringArray("Targets")]
+script = ExtResource("4_u2wgk")
+custom_target = true
+Targets = [NodePath("../securityDrone")]
+is_playing = true
+AutoPlay = true
+intensity = 0.05
+shakerPreset = SubResource("Resource_gia32")
+
+[node name="securityDrone" parent="." instance=ExtResource("1_ovauf")]
+transform = Transform3D(0.996942, 0, -0.0781476, 0, 1, 0, 0.0781476, 0, 0.996942, -0.00445567, -0.0498011, -0.0383652)
+
+[editable path="securityDrone"]

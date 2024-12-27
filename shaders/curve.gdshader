@@ -14,6 +14,7 @@ void fragment() {
 	vec4 albedo = texture(texture_albedo, UV);
 	ALBEDO = albedo.rgb;
 	ALPHA = albedo.a;
+	
 }
 
 //void light() {

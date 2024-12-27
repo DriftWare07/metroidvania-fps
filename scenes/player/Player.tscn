@@ -467,7 +467,7 @@ offset_right = 500.0
 offset_bottom = 154.0
 grow_horizontal = 2
 theme_override_styles/background = SubResource("StyleBoxFlat_iwydv")
-value = 50.0
+value = 100.0
 show_percentage = false
 
 [node name="hplabel" type="Label" parent="CanvasLayer/SubViewport/Control/healthbar"]

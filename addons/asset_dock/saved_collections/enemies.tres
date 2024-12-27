@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="CollectionsData" load_steps=2 format=3 uid="uid://b6wrn6c0p5mgm"]
+
+[ext_resource type="Script" path="res://addons/asset_dock/collection_data.gd" id="1_qvqgb"]
+
+[resource]
+script = ExtResource("1_qvqgb")
+collection_name = "enemies"
+collection_items = Array[int]([4365806846493759373])
