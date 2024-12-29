@@ -1,5 +1,6 @@
-[gd_scene load_steps=14 format=3 uid="uid://b3g3g3ispjxfp"]
+[gd_scene load_steps=16 format=3 uid="uid://b3g3g3ispjxfp"]
 
+[ext_resource type="Script" path="res://scenes/enemies/securityDrone/security_drone.gd" id="1_iy83y"]
 [ext_resource type="PackedScene" uid="uid://dhrxoc474agwd" path="res://assets/models/enemies/security drone/securityDrone.glb" id="1_ovauf"]
 [ext_resource type="AudioStream" uid="uid://do8spk21q6pxo" path="res://assets/sounds/drone_fans_loop.wav" id="2_8whu7"]
 [ext_resource type="Script" path="res://components/healthcomponent.gd" id="3_crldv"]
@@ -51,7 +52,11 @@ ScaleShake = Array[ExtResource("5_enp7j")]([])
 bake_internal = 64
 __follow_timeline = false
 
+[sub_resource type="SphereShape3D" id="SphereShape3D_ofi2g"]
+radius = 8.5487
+
 [node name="SecurityDrone" type="CharacterBody3D"]
+script = ExtResource("1_iy83y")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.254071, 0)
@@ -64,6 +69,7 @@ autoplay = true
 [node name="Health_Component" type="Node" parent="." node_paths=PackedStringArray("host")]
 script = ExtResource("3_crldv")
 host = NodePath("..")
+delete_host_on_death = false
 max_health = 30.0
 health = 30.0
 
@@ -79,12 +85,32 @@ shape = SubResource("SphereShape3D_weutp")
 script = ExtResource("4_u2wgk")
 custom_target = true
 Targets = [NodePath("../securityDrone")]
-is_playing = true
+randomize = true
 AutoPlay = true
 intensity = 0.05
 shakerPreset = SubResource("Resource_gia32")
 
 [node name="securityDrone" parent="." instance=ExtResource("1_ovauf")]
-transform = Transform3D(0.996942, 0, -0.0781476, 0, 1, 0, 0.0781476, 0, 0.996942, -0.00445567, -0.0498011, -0.0383652)
+transform = Transform3D(-4.37113e-08, 0, -0.999999, 0, 1, 0, 0.999999, 0, -4.37113e-08, -0.0912951, 0.0310434, -0.0426045)
+
+[node name="groundcast" type="RayCast3D" parent="."]
+target_position = Vector3(0, -2, 0)
+
+[node name="ceilingcast" type="RayCast3D" parent="."]
+target_position = Vector3(0, 1, 0)
+
+[node name="detectionRange" type="Area3D" parent="."]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="detectionRange"]
+shape = SubResource("SphereShape3D_ofi2g")
+
+[node name="RayCast3D" type="RayCast3D" parent="detectionRange"]
+target_position = Vector3(0, -1, -100)
+
+[connection signal="dead" from="Health_Component" to="." method="explode"]
+[connection signal="body_entered" from="detectionRange" to="." method="_on_detection_range_body_entered"]
+[connection signal="body_exited" from="detectionRange" to="." method="_on_detection_range_body_exited"]
 
 [editable path="securityDrone"]
