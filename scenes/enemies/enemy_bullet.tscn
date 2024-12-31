@@ -1,0 +1,162 @@
+[gd_scene load_steps=19 format=3 uid="uid://ce6a8r7p04e5s"]
+
+[ext_resource type="Script" path="res://scenes/projectiles/bullet.gd" id="1_7ue4g"]
+[ext_resource type="Script" path="res://components/damagecomponent.gd" id="2_5mlc1"]
+[ext_resource type="ArrayMesh" uid="uid://rjclm1ialgnp" path="res://assets/fireball.obj" id="4_ng7f6"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_k63ek"]
+radius = 0.05
+
+[sub_resource type="VisualShaderNodeColorParameter" id="VisualShaderNodeColorParameter_7371o"]
+parameter_name = "Flame_Color"
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_cjg2w"]
+noise_type = 2
+frequency = 0.0183
+fractal_type = 2
+fractal_octaves = 1
+cellular_distance_function = 1
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_8cqcj"]
+seamless = true
+noise = SubResource("FastNoiseLite_cjg2w")
+
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_yqi4v"]
+expanded_output_ports = [0]
+texture = SubResource("NoiseTexture2D_8cqcj")
+texture_type = 1
+
+[sub_resource type="Gradient" id="Gradient_k6ruh"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_gg8ql"]
+gradient = SubResource("Gradient_k6ruh")
+fill_from = Vector2(1, 0.380342)
+
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_ffsta"]
+expanded_output_ports = [0]
+texture = SubResource("GradientTexture2D_gg8ql")
+texture_type = 1
+
+[sub_resource type="VisualShaderNodeFloatOp" id="VisualShaderNodeFloatOp_j8rvi"]
+operator = 1
+
+[sub_resource type="VisualShaderNodeClamp" id="VisualShaderNodeClamp_8n6ap"]
+
+[sub_resource type="VisualShaderNodeUVFunc" id="VisualShaderNodeUVFunc_r6swh"]
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_52cyv"]
+input_name = "time"
+
+[sub_resource type="VisualShaderNodeVectorOp" id="VisualShaderNodeVectorOp_1x11q"]
+default_input_values = [0, Vector2(0, 0), 1, Vector2(0, 1)]
+op_type = 0
+operator = 2
+
+[sub_resource type="VisualShader" id="VisualShader_ak6th"]
+code = "shader_type spatial;
+render_mode blend_mix, depth_draw_opaque, cull_disabled, diffuse_lambert, specular_schlick_ggx, unshaded, shadows_disabled, ambient_light_disabled;
+
+uniform vec4 Flame_Color : source_color;
+uniform sampler2D tex_frg_3 : source_color;
+uniform sampler2D tex_frg_4 : source_color;
+
+
+
+void fragment() {
+// ColorParameter:2
+	vec4 n_out2p0 = Flame_Color;
+
+
+// Input:8
+	float n_out8p0 = TIME;
+
+
+// VectorOp:9
+	vec2 n_in9p1 = vec2(0.00000, 1.00000);
+	vec2 n_out9p0 = vec2(n_out8p0) * n_in9p1;
+
+
+// UVFunc:7
+	vec2 n_in7p1 = vec2(1.00000, 1.00000);
+	vec2 n_out7p0 = n_out9p0 * n_in7p1 + UV;
+
+
+// Texture2D:3
+	vec4 n_out3p0 = texture(tex_frg_3, n_out7p0);
+	float n_out3p1 = n_out3p0.r;
+
+
+// Texture2D:4
+	vec4 n_out4p0 = texture(tex_frg_4, UV);
+	float n_out4p1 = n_out4p0.r;
+
+
+// FloatOp:5
+	float n_out5p0 = n_out3p1 - n_out4p1;
+
+
+// Clamp:6
+	float n_in6p1 = 0.00000;
+	float n_in6p2 = 1.00000;
+	float n_out6p0 = clamp(n_out5p0, n_in6p1, n_in6p2);
+
+
+// Output:0
+	ALBEDO = vec3(n_out2p0.xyz);
+	ALPHA = n_out6p0;
+
+
+}
+"
+modes/cull = 2
+flags/unshaded = true
+flags/shadows_disabled = true
+flags/ambient_light_disabled = true
+nodes/fragment/2/node = SubResource("VisualShaderNodeColorParameter_7371o")
+nodes/fragment/2/position = Vector2(-280, 220)
+nodes/fragment/3/node = SubResource("VisualShaderNodeTexture_yqi4v")
+nodes/fragment/3/position = Vector2(-280, 440)
+nodes/fragment/4/node = SubResource("VisualShaderNodeTexture_ffsta")
+nodes/fragment/4/position = Vector2(-260, 800)
+nodes/fragment/5/node = SubResource("VisualShaderNodeFloatOp_j8rvi")
+nodes/fragment/5/position = Vector2(-20, 680)
+nodes/fragment/6/node = SubResource("VisualShaderNodeClamp_8n6ap")
+nodes/fragment/6/position = Vector2(180, 640)
+nodes/fragment/7/node = SubResource("VisualShaderNodeUVFunc_r6swh")
+nodes/fragment/7/position = Vector2(-540, 540)
+nodes/fragment/8/node = SubResource("VisualShaderNodeInput_52cyv")
+nodes/fragment/8/position = Vector2(-1100, 560)
+nodes/fragment/9/node = SubResource("VisualShaderNodeVectorOp_1x11q")
+nodes/fragment/9/position = Vector2(-797.12, 634.77)
+nodes/fragment/connections = PackedInt32Array(2, 0, 0, 0, 3, 1, 5, 0, 4, 1, 5, 1, 5, 0, 6, 0, 6, 0, 0, 1, 7, 0, 3, 0, 8, 0, 9, 0, 9, 0, 7, 2)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ilesi"]
+render_priority = 0
+shader = SubResource("VisualShader_ak6th")
+shader_parameter/Flame_Color = Color(2, 1.6, 0, 1)
+
+[node name="enemy_bullet" type="Node3D"]
+script = ExtResource("1_7ue4g")
+speed = 17
+
+[node name="PlayerBullet" type="Area3D" parent="." groups=["enemy"]]
+script = ExtResource("2_5mlc1")
+exclusion_group = "enemy"
+delete_host_on_dealing_damage = false
+die_on_body = false
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PlayerBullet"]
+shape = SubResource("SphereShape3D_k63ek")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="PlayerBullet"]
+transform = Transform3D(-0.1, 0, -8.74228e-09, 0, 0.1, 0, 8.74228e-09, 0, -0.1, 0, 0, 0)
+material_override = SubResource("ShaderMaterial_ilesi")
+mesh = ExtResource("4_ng7f6")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+light_color = Color(0.6, 1.3, 2, 1)
+light_energy = 0.2
+shadow_enabled = true
+omni_range = 2.83267
+
+[connection signal="damageDelt" from="PlayerBullet" to="." method="die_on_body"]
