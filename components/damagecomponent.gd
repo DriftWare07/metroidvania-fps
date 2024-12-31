@@ -34,5 +34,5 @@ func callback():
 	#if delete_host_on_dealing_damage: get_parent().queue_free()
 
 func on_body(body):
-	if not die_on_body: return
+	if body.is_in_group(exclusion_group): return
 	damageDelt.emit()

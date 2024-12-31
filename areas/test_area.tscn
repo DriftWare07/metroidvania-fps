@@ -255,7 +255,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.5538, 2.67575, 0)
 curve = SubResource("Curve3D_17p7m")
 
 [node name="PathFollow3D" type="PathFollow3D" parent="SubViewport/worldParent/Path3D" index="0"]
-transform = Transform3D(0.2085, -0.00137505, -0.978021, -5.82077e-11, 0.999999, -0.00140595, 0.978022, 0.00029314, 0.2085, -0.877864, -0.00485158, -2.48815)
+transform = Transform3D(0.2085, -0.00137505, -0.978021, -5.82076e-11, 0.999999, -0.00140595, 0.978022, 0.00029314, 0.2085, -0.877864, -0.00485158, -2.48815)
 script = ExtResource("18_3x2u6")
 speed = 1
 

@@ -352,7 +352,7 @@ material_override = SubResource("ShaderMaterial_7a82d")
 mesh = SubResource("PlaneMesh_aeph3")
 skeleton = NodePath("../..")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="." groups=["player"]]
 shape = SubResource("CapsuleShape3D_li7ud")
 
 [node name="Health_Component" type="Node" parent="." node_paths=PackedStringArray("host")]
