@@ -65,11 +65,13 @@ func _physics_process(delta: float) -> void:
 			
 
 func alert_mode(delta):
-	var look_target = global_transform.looking_at(target.global_transform.origin)
+	#var look_target = global_transform.looking_at(target.global_transform.origin)
+	#
+	#global_transform.basis.y = lerp(global_transform.basis.y, look_target.basis.y, delta)
+	#global_transform.basis.x = lerp(global_transform.basis.x, look_target.basis.x, delta)
+	#global_transform.basis.z = lerp(global_transform.basis.z, look_target.basis.z, delta)
 	
-	global_transform.basis.y = lerp(global_transform.basis.y, look_target.basis.y, delta)
-	global_transform.basis.x = lerp(global_transform.basis.x, look_target.basis.x, delta)
-	global_transform.basis.z = lerp(global_transform.basis.z, look_target.basis.z, delta)
+	look_at(target.global_position)
 	
 	
 
