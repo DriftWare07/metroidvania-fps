@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://dcufivs23yb02"]
+[gd_scene load_steps=34 format=3 uid="uid://dcufivs23yb02"]
 
 [ext_resource type="PackedScene" uid="uid://cuo8yd1giiv71" path="res://scenes/levelParent.tscn" id="1_ydlpu"]
 [ext_resource type="Material" uid="uid://ug77jpkonf7g" path="res://assets/area textures/dark_metal.tres" id="2_yl5wb"]
@@ -19,6 +19,7 @@
 [ext_resource type="PackedScene" uid="uid://dgsll2pnhdqhx" path="res://scenes/switches/blastSwitch.tscn" id="17_xu2ei"]
 [ext_resource type="Script" path="res://components/pathfollowparent.gd" id="18_3x2u6"]
 [ext_resource type="PackedScene" uid="uid://b3g3g3ispjxfp" path="res://scenes/enemies/securityDrone/securityDrone.tscn" id="18_y4qqg"]
+[ext_resource type="PackedScene" uid="uid://bhs1er0gc0rjs" path="res://assets/models/save station/save_station.glb" id="20_aehkk"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_wgykh"]
 vertices = PackedVector3Array(-4.25, 1, -22.5, -2.25, 1, -22.5, -2.25, 1, -49.5, -4.5, 1, -22, -49.5, 1, -49.5, -49.5, 1, -22, 1.5, 1, -22.5, 1.5, 1, -49.5, 3.5, 1, -22.5, 3.75, 1, -20.75, 49.5, 1, -21, 49.5, 1, -49.5, -49.5, 1, 0.5, -4.25, 1, 0.25, -2.5, 5.5, 2.25, 2.5, 5.5, 2.25, 2.75, 5.5, -1.25, 2.5, 5.5, -22, -2.5, 5.5, -22, 3.75, 1, 0.25, 49.5, 1, 0.5, 1.5, 1, -4.75, 2, 1, -5, 2, 1, -6, 1.5, 1, -11.5, 2, 1, -11.75, 2, 1, -12.75, 1.5, 1, -13, 1.5, 1, -6.25, -1.5, 1, 0.25, 1.5, 1, -9.75, 1.25, 1, -16.5, -2.25, 1, -20.25, 2, 1, -9.5, 1.75, 1, -16.25, 1.5, 1, -20.25, 1.5, 1, 0.25, -4, 1, 2, -49.5, 1, 49.5, -2, 1, 49.5, -2, 1, 2, 3.5, 1, 2, 1.75, 1, 2.25, 1.5, 1, 49.5, 49.5, 1, 49.5)
@@ -112,7 +113,7 @@ collision_layer = 3
 size = Vector3(100, 1, 100)
 
 [node name="Basic FPS Player" parent="SubViewport/worldParent" index="1" instance=ExtResource("3_f1kks")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11.7232, 1.81421, 0.766552)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.41337, 1.81421, 6.05606)
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="SubViewport/worldParent/Basic FPS Player" index="5"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -262,6 +263,9 @@ speed = 1
 [node name="SecurityDrone" parent="SubViewport/worldParent" index="10" node_paths=PackedStringArray("path_follower") instance=ExtResource("18_y4qqg")]
 transform = Transform3D(1, -1.16415e-10, 8.9407e-08, 1.16415e-10, 1, 2.91038e-11, 1.49012e-08, -2.91038e-11, 1, 9.77449, 1.79204, -2.48526)
 path_follower = NodePath("../Path3D/PathFollow3D")
+
+[node name="save_station" parent="SubViewport/worldParent" index="11" instance=ExtResource("20_aehkk")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.30127, 0.621333, -2.96289)
 
 [connection signal="switched_off" from="SubViewport/worldParent/protoCSGParent/Multiswitch" to="SubViewport/worldParent/protoCSGParent/powerDoor" method="close"]
 [connection signal="switched_on" from="SubViewport/worldParent/protoCSGParent/Multiswitch" to="SubViewport/worldParent/protoCSGParent/powerDoor" method="open"]

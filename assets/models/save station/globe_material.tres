@@ -1,0 +1,7 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://bgq0qb123l7fq"]
+
+[ext_resource type="Shader" uid="uid://dd5s6jea7ppd4" path="res://shaders/globe_material.tres" id="1_3lkks"]
+
+[resource]
+render_priority = 0
+shader = ExtResource("1_3lkks")

@@ -124,6 +124,7 @@ func de_aggro() -> void:
 		return
 	
 	alerted = false
+	alert_falloff.stop()
 
 
 func _on_shoot_delay_timeout() -> void:
